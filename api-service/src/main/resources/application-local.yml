@@ -1,0 +1,35 @@
+spring:
+  jpa:
+    database: mysql
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/guide?useSSL=false&serverTimezone=UTC
+      username: root
+      password:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    root: info
+    org:
+      hibernate:
+        type: trace
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
