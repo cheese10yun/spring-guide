@@ -29,4 +29,17 @@ public class MemberTest {
         assertThat(member.getName().getLast()).isEqualTo("last");
 
     }
+
+    @Test
+    public void toString_test() {
+        final Member member = MemberBuilder.build();
+        final String memberToString = member.toString();
+
+        assertThat(memberToString).contains(
+                member.getEmail().getValue(),
+                member.getName().getFirst(),
+                member.getName().getLast(),
+                member.getName().getMiddle()
+        );
+    }
 }

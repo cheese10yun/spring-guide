@@ -7,9 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 
 
 public class MemberRepositoryTest extends JpaTest {
@@ -40,6 +42,8 @@ public class MemberRepositoryTest extends JpaTest {
         assertThat(saveMember.getName().getFirst()).isEqualTo("first");
         assertThat(saveMember.getName().getMiddle()).isEqualTo("middle");
         assertThat(saveMember.getName().getLast()).isEqualTo("last");
+        assertThat(saveMember.getCreateAt()).isAfter(LocalDateTime.now().minusMinutes(1));
+        assertThat(saveMember.getUpdateAt()).isAfter(LocalDateTime.now().minusMinutes(1));
     }
 
     @Test

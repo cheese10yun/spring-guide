@@ -1,12 +1,8 @@
 package com.spring.guide.domain.member;
 
-import com.spring.guide.model.Address;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,6 +13,8 @@ import java.time.LocalDateTime;
 @Table(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@EqualsAndHashCode(of = {"id"})
+@ToString(of = {"email", "name"})
 public class Member {
 
     @Id
