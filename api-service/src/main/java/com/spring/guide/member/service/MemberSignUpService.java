@@ -2,9 +2,8 @@ package com.spring.guide.member.service;
 
 import com.spring.guide.domain.member.Member;
 import com.spring.guide.domain.member.MemberRepository;
+import com.spring.guide.member.dto.SignUpRequest;
 import com.spring.guide.member.exception.EmailDuplicateException;
-import com.spring.guide.model.Email;
-import com.spring.guide.model.Name;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,18 +16,13 @@ public class MemberSignUpService {
 
     private final MemberRepository memberRepository;
 
-    public Member doSignUp(final Email email, final Name name) {
+    public Member doSignUp(final SignUpRequest dto) {
 
-        if (memberRepository.existsByEmail(email)) {
-            throw new EmailDuplicateException(email);
+        if (memberRepository.existsByEmail(dto.getEmail())) {
+            throw new EmailDuplicateException(dto.getEmail());
         }
 
-        final Member member = Member.builder()
-                .name(name)
-                .email(email)
-                .build();
-
-        return memberRepository.save(member);
+        return memberRepository.save(dto.toEntity());
     }
 
 }

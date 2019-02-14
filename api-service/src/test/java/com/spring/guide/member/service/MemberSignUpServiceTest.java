@@ -3,6 +3,8 @@ package com.spring.guide.member.service;
 import com.spring.guide.domain.member.Member;
 import com.spring.guide.domain.member.MemberRepository;
 import com.spring.guide.member.MemberBuilder;
+import com.spring.guide.member.dto.SignUpRequest;
+import com.spring.guide.member.dto.SignUpRequestBuilder;
 import com.spring.guide.member.exception.EmailDuplicateException;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
@@ -37,12 +39,13 @@ public class MemberSignUpServiceTest extends MockTest {
         //given
         final Email email = member.getEmail();
         final Name name = member.getName();
+        final SignUpRequest dto = SignUpRequestBuilder.build(email, name);
 
         given(memberRepository.existsByEmail(any())).willReturn(false);
         given(memberRepository.save(any())).willReturn(member);
 
         //when
-        final Member signUpMember = memberSignUpService.doSignUp(email, name);
+        final Member signUpMember = memberSignUpService.doSignUp(dto);
 
         //then
         assertThat(signUpMember).isNotNull();
@@ -55,10 +58,11 @@ public class MemberSignUpServiceTest extends MockTest {
         //given
         final Email email = member.getEmail();
         final Name name = member.getName();
+        final SignUpRequest dto = SignUpRequestBuilder.build(email, name);
 
         given(memberRepository.existsByEmail(any())).willReturn(true);
 
         //when
-        memberSignUpService.doSignUp(email, name);
+        memberSignUpService.doSignUp(dto);
     }
 }

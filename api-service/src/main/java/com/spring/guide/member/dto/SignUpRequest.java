@@ -1,5 +1,6 @@
 package com.spring.guide.member.dto;
 
+import com.spring.guide.domain.member.Member;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
 import lombok.AccessLevel;
@@ -21,5 +22,12 @@ public class SignUpRequest {
     SignUpRequest(@Valid Email email, @Valid Name name) {
         this.email = email;
         this.name = name;
+    }
+
+    public Member toEntity() {
+        return Member.builder()
+                .name(name)
+                .email(email)
+                .build();
     }
 }

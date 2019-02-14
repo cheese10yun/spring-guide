@@ -6,7 +6,6 @@ import com.spring.guide.member.dto.SignUpRequestBuilder;
 import com.spring.guide.member.service.MemberSignUpService;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
-import com.spring.guide.utile.IntegrationTest;
 import com.spring.guide.utile.MockMvcTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +46,7 @@ public class MemberMockApiTest extends MockMvcTest {
         final Name name = member.getName();
         final SignUpRequest dto = SignUpRequestBuilder.build(email, name);
 
-        given(memberSignUpService.doSignUp(any(), any())).willReturn(member);
+        given(memberSignUpService.doSignUp(any())).willReturn(member);
 
         //when
         final ResultActions resultActions = requestSignUp(dto);
@@ -73,7 +72,7 @@ public class MemberMockApiTest extends MockMvcTest {
         final SignUpRequest dto = SignUpRequestBuilder.build(email, name);
         final Member member = MemberBuilder.build();
 
-        given(memberSignUpService.doSignUp(any(), any())).willReturn(member);
+        given(memberSignUpService.doSignUp(any())).willReturn(member);
 
         //when
         final ResultActions resultActions = requestSignUp(dto);
