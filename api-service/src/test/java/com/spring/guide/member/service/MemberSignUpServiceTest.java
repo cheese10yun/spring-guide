@@ -30,7 +30,6 @@ public class MemberSignUpServiceTest extends MockTest {
 
     @Before
     public void setUp() throws Exception {
-
         member = MemberBuilder.build();
     }
 
