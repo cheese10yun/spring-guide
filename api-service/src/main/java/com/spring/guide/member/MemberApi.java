@@ -21,8 +21,7 @@ public class MemberApi {
 
     @PostMapping
     public MemberResponse create(@RequestBody @Valid final SignUpRequest dto) {
-        final Member member = memberSignUpService.doSignUp(dto.getEmail());
-        final MemberResponse memberResponse = new MemberResponse(member);
-        return memberResponse;
+        final Member member = memberSignUpService.doSignUp(dto);
+        return new MemberResponse(member);
     }
 }
