@@ -5,26 +5,13 @@
 
 # 테스트 정책
 
-| 어노테이션           | 설명                   | 부모 클래스          | Bean         |
-| --------------- | -------------------- | --------------- | ------------ |
-| @SpringBootTest | 통합 테스트, 전체           | IntegrationTest | Bean 전체      |
-| @WebMvcTest     | 단위 테스트, Mvc 테스트      | MockApiTest     | MVC 관련된 Bean |
-| @DataJpaTest    | 단위 테스트, Jpa 테스트      | RepositoryTest  | JPA 관련 Bean  |
-| @RestClientTest | 단위 테스트, Rest API 테스트 | 일부 Bean         | MockBean     |
-| None            | 단위 테스트, Service 테스트  | MockTest        | None         |
-| None            | POJO, 도메인 테스트        | 일부 Bean         | None         |
-
-
-# 테스트 코드가 주는 장점
-* 냄세나느 코드를 빨리 알 수 있다.
-* 테스트 작성이 어렵다는 것은 로직의 문제가 있다는 것이다.
-
-
-# 테스트 코드 작성시 주의
-* rollback 되어야함
-* 테스트의 순서와 상관이 수행
-* 데이터베이스에 의존하지 않은 코드 작성
-
+| 어노테이션           | 설명                  | 부모 클래스          | Bean         |
+| --------------- | ------------------- | --------------- | ------------ |
+| @SpringBootTest | 통합 테스트, 전체          | IntegrationTest | Bean 전체      |
+| @WebMvcTest     | 단위 테스트, Mvc 테스트     | MockApiTest     | MVC 관련된 Bean |
+| @DataJpaTest    | 단위 테스트, Jpa 테스트     | RepositoryTest  | JPA 관련 Bean  |
+| None            | 단위 테스트, Service 테스트 | MockTest        | None         |
+| None            | POJO, 도메인 테스트       | None            | None         |
 
 # 통합테스트
 
@@ -124,10 +111,10 @@ public class MemberApiTest extends IntegrationTest {
     ...
 }
 ```
-* `IntegrationTest` 클래스를 상속받습니다. 이 상속을 통해서 MemberApiTest에서 테스트를 위한 어노테이션이 생략되며 어떤 통합 테스트라도 항상 통일성을 갖을 수 있습니다.
-* `given`, `when`, `then` 키워드로 테스트 흐름을 알려줍니다. 다른 사람의 테스트 코드의 가독성이 높아지기 때문에 해당 키워드로 적절하게 표시하는것을 권장합니다.
-* 요청에 대한 메서드를 `requestSignUp(...)` 으로 분리해서 재사용성을 높입니다. 해당 메서드로 valdate 실패하는 케이스도 작성합니다 `andDo(print())` 메서드를 추가해서 해당 요청에 대한 출력을 확인합니다. 디버깅에 매우 유용합니다.
-* 모든 response에 대한 `andExpect`를 작성합니다. 간혹 `.andExpect(content().string(containsString("")))` 이런 테스트를 진행하는데 특정 문자열이 들어 있는지 없는지 확인하는 것은 것보다 모든 Reponse에 대한 검증을 지향합니다.
+* `IntegrationTest` 클래스를 상속받습니다. 이 상속을 통해서 MemberApiTest에서 테스트를 위한 어 로테이션이 생략되며 어떤 통합 테스트라도 항상 통일성을 가질 수 있습니다.
+* `given`, `when`, `then` 키워드로 테스트 흐름을 알려줍니다. 다른 사람의 테스트 코드의 가독성이 높아지기 때문에 해당 키워드로 적절하게 표시하는 것을 권장합니다.
+* 요청에 대한 메서드를 `requestSignUp(...)`으로 분리해서 재사용성을 높입니다. 해당 메서드로 valdate 실패하는 케이스도 작성합니다 `andDo(print())` 메서드를 추가해서 해당 요청에 대한 출력을 확인합니다. 디버깅에 매우 유용합니다.
+* 모든 response에 대한 `andExpect`를 작성합니다. 간혹 `.andExpect(content().string(containsString("")))` 이런 테스트를 진행하는데 특정 문자열이 들어 있는지 없는지 확인하는 것은 것보다 모
   * **response에 하나라도 빠지거나 변경되면 API 변경이 이루어진 것이고 그 변경에 맞게 테스트 코드도 변경되어야 합니다.**
 * `회원 조회` 테스트 강은 경우 `memberSetup.save();` 메서드로 테스트전에 데이터베이스에 insert 합니다. 
   * 데이터베이스에 미리 있는 값을 검증하는 것은 데이터베이스 상태에 의존한 코드가 되며 누군가가 회원 정보를 변경하게 되면 테스트 코드가 실패하게 됩니다.
@@ -139,11 +126,11 @@ public class MemberApiTest extends IntegrationTest {
 ## 장점
 * 진행하고자 하는 테스트에만 집중할 수 있습니다.
 * 테스트 진행시 중요 관점이 아닌 것들은 Mocking 처리해서 외부 의존성들을 줄일 수 있습니다.
-  * 예를들어 주문 할인 로직이 제대로 동작하는지에 대한 테스트만 진행하지 이게 실제로 데이터베이스에 insert되는지 여부는 해당 테스트의 관심사가 아닙니다.
+  * 예를 들어 주문 할인 로직이 제대로 동작하는지에 대한 테스트만 진행하지 이게 실제로 데이터베이스에 insert되는지는 해당 테스트의 관심사가 아닙니다.
 * 테스트 속도가 빠릅니다.
 
 ## 단점
-* 의존성있는 객체를 Mocking 하기 때문에 문제가 완결된 테스트는 아닙니다.
+* 의존성 있는 객체를 Mocking 하기 때문에 문제가 완결된 테스트는 아닙니다.
 * Mocking 하기가 귀찮습니다.
 * Mocking 라이브러리에 대한 학습 비용이 발생합니다.
 
@@ -227,16 +214,16 @@ public class MemberSignUpServiceTest extends MockTest {
 # Mock API 테스트
 
 ## 장점
-* Mock 테스트와 장점은 거의 동일합니다.
-* `WebApplication` 관련된 Bean들만 등록하기 때문에 통합 테스트 보다 빠르게 테스트 할 수 있습니다.
+* Mock 테스트와 장점은 거의 같습니다.
+* `WebApplication` 관련된 Bean들만 등록하기 때문에 통합 테스트보다 빠르게 테스트할 수 있습니다.
 * 통합 테스트를 진행하기 어려운 테스트를 진행합니다.
   * 외부 API 같은 Rollback 처리가 힘들거나 불가능한 테스트를 주로 사용합니다.
-  * 예를 들어 외부 결제 모듈 API를 콜하면 안돼는 케이스에서 주로 사용 할 수 있습니다.
-  * 이런 문제는 통합 테스트에서 해당 객체를 Mock 객체로 변경해서 테스트를 변경해서 테스트를 할 수도 있습니다.
+  * 예를 들어 외부 결제 모듈 API를 콜하면 안 되는 케이스에서 주로 사용 할 수 있습니다.
+  * 이런 문제는 통합 테스트에서 해당 객체를 Mock 객체로 변경해서 테스트를 변경해서 테스트할 수도 있습니다.
 
 ## 단점
-* Mcok 테스트와 다점은 거의 동일합니다.
-* 요청 부터 응답까지 모든 테스트를 Mock 기반으로 테스트하기 때문에 실제 환경에서는 제대로 동작하지 않을 가능성이 매우큽니다.
+* Mcok 테스트와 다점은 거의 같습니다.
+* 요청부터 응답까지 모든 테스트를 Mock 기반으로 테스트하기 때문에 실제 환경에서는 제대로 동작하지 않을 가능성이 매우 큽니다.
 
 ## Code
 ```java
@@ -336,11 +323,100 @@ public class MemberRepositoryTest extends RepositoryTest {
 
 # POJO 테스트
 
-```java
-```
+## 설명
+각 엔티티(Embeddable, Entity, 일반 POJO, 모든 객체) 객체들의 기능이 풍부해야 합니다. 객체 본인의 책임을 충분히 다하지 않고 있으면 다른 영역으로 그 객체의 책임이 넘어 가게됩니다. 예를 들어 `Name` 객체가 `getFullName()` 메서드를 제공해주지 않는다면 `getFullName()` 메서드를 만족시키는 메서드들이 다른 계층에서 구현하게 되고 어느 계층에서 어떻게 사용되고 있는지 모르기 때문에 누군가는 중복코드를 만들게 됩니다.
+
+객체지향에서 본인의 책임(기능)은 본인 스스로가 제공해야 합니다. 특히 엔티티 객체들은 가장 핵심 객체이고 이 객체를 사용하는 계층들이 다양하게 분포되기 때문에 반드시 테스트 코드를 작성해야합니다.
 
 ## 장점
+* POJO 객체이므로 테스트하기 편합니다. 외부에서 주입 받을 의존성도 없고 Mocking할 대상도 없습니다.
+* 엔티티 객체는 사용하는 계층이 많으므로 테스트의 효율성이 높습니다.
 
 ## 단점
+* 단점은 없다고 생각합니다. POJO를 테스트 하므로 테스트 속도 및 난도가 낮지만 높은 안전성을 갖게 됩니다.
 
 ## Code
+
+### Embeddable
+```java
+@Embeddable
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"first", "middle", "last"})
+public class Name {
+
+    @NotEmpty
+    @Column(name = "first_name", length = 50)
+    private String first;
+
+    @Column(name = "middle_name", length = 50)
+    private String middle;
+
+    @NotEmpty
+    @Column(name = "last_name", length = 50)
+    private String last;
+
+    @Builder
+    public Name(final String first, final String middle, final String last) {
+        this.first = first;
+        this.middle = StringUtils.isEmpty(middle) ? null : middle;
+        this.last = last;
+    }
+
+    public String getFullName() {
+        if (this.middle == null) {
+            return String.format("%s %s", this.first, this.last);
+        }
+        return String.format("%s %s %s", this.first, this.middle, this.last);
+    }
+}
+```
+* `Name` 객체는 `Member` 객체에서 사용하고 있습니다. 이처럼 Name 이라는 객체를 `Embeddable`으로 별도로 가지고 있으면 데이터의 응집력 재사용성이 높아집니다.
+  * 예를 들어 주문시 주문자 정보를 받아야 된다면 `Order` 라는 객체에도 동일하게 `Name` 객체를 사용하면 재사용성이 높아집니다.
+* `Embeddable` 객체에서도 다른 객체와 마찬가지로 `Name` 관련된 기능을 충분히 제공해야 합니다. `getFullName()` 메서드 처럼 `first`, `last`, `middle`의 이름을 적절하게 조합해서 제공해줍니다.
+
+### Test Code
+```java
+public class NameTest {
+
+    @Test
+    public void getFullName_isFullName_ReturnFullName() {
+        final Name name = Name.builder()
+                .first("first")
+                .middle("middle")
+                .last("last")
+                .build();
+        final String fullName = name.getFullName();
+        assertThat(fullName, is("first middle last"));
+    }
+
+    @Test
+    public void getFullName_WithoutMiddle_ReturnMiddleNameIsNull() {
+        final Name name = Name.builder()
+                .first("first")
+                .middle("")
+                .last("last")
+                .build();
+        final String fullName = name.getFullName();
+        assertThat(fullName, is("first last"));
+        assertThat(name.getMiddle(), is(nullValue()));
+    }
+
+    @Test
+    public void getFullName_MiddleNameIsNull_ReturnMiddleNameIsNull() {
+        final Name name = Name.builder()
+                .first("first")
+                .middle("")
+                .last("last")
+                .build();
+        final String fullName = name.getFullName();
+        assertThat(fullName, is("first last"));
+        assertThat(name.getMiddle(), is(nullValue()));
+    }
+
+}
+```
+* `entity`, `Embeddable` 객체 등의 객체들도 반드시 테스트 코드를 작성해야합니다.
+* middle 값이 비어있을 경우 null로 잘들어가는지, `getFullName()` 메서드가 잘 동작하는지 테스트합니다.
+
+# 결론
