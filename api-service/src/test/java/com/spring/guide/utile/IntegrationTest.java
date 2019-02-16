@@ -25,7 +25,10 @@ import java.io.InputStream;
 @SpringBootTest(classes = ApiApp.class)
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class)
+@Import({
+        RestDocsConfiguration.class,
+        MemberSetup.class
+})
 @ActiveProfiles("test")
 @Transactional
 @Ignore

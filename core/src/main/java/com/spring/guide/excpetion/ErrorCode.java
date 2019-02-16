@@ -7,6 +7,7 @@ public enum ErrorCode {
 
     // Common
     INVALID_INPUT_VALUE(400, "C001", " Invalid Input Value"),
+    METHOD_NOT_ALLOWED(405, "C001", " Invalid Input Value"),
     ENTITY_NOT_FOUND(400, "C002", " Entity Not Found"),
     INTERNAL_SERVER_ERROR(500, "C003", "Server Error"),
     INVALID_TYPE_VALUE(400, "C004", " Invalid Type Value"),

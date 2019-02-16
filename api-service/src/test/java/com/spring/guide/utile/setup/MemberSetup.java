@@ -7,6 +7,7 @@ import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +16,8 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Profile("test")
-@Component
 @RequiredArgsConstructor
+@TestConfiguration
 public class MemberSetup {
 
     private final MemberRepository memberRepository;
@@ -45,6 +46,5 @@ public class MemberSetup {
                         .build())
                 .build();
     }
-
 
 }
