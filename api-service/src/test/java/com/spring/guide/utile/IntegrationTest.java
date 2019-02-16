@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import com.google.common.io.ByteSource;
 import com.spring.guide.ApiApp;
+import com.spring.guide.utile.setup.MemberSetup;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class IntegrationTest {
 
     @Autowired
     protected MockMvc mvc;
+
+    @Autowired
+    protected MemberSetup memberSetup;
 
     @Autowired
     protected ObjectMapper objectMapper;

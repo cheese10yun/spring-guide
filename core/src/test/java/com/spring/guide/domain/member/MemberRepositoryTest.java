@@ -1,8 +1,10 @@
 package com.spring.guide.domain.member;
 
 import com.spring.guide.model.Email;
+import com.spring.guide.utile.setup.model.EmailBuilder;
 import com.spring.guide.model.Name;
-import com.spring.guide.utile.JpaTest;
+import com.spring.guide.utile.setup.model.NameBuilder;
+import com.spring.guide.utile.RepositoryTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,7 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-
-public class MemberRepositoryTest extends JpaTest {
+public class MemberRepositoryTest extends RepositoryTest {
 
     @Autowired
     private MemberRepository memberRepository;
@@ -25,14 +26,8 @@ public class MemberRepositoryTest extends JpaTest {
     @Before
     public void setUp() throws Exception {
         final String value = "cheese10yun@gmail.com";
-        email = Email.of(value);
-
-        final Name name = Name.builder()
-                .first("first")
-                .middle("middle")
-                .last("last")
-                .build();
-
+        email = EmailBuilder.build(value);
+        final Name name = NameBuilder.build();
         saveMember = memberRepository.save(MemberBuilder.build(email, name));
     }
 

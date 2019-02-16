@@ -6,9 +6,12 @@ import com.spring.guide.member.dto.SignUpRequestBuilder;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
 import com.spring.guide.utile.IntegrationTest;
+import com.spring.guide.utile.setup.MemberSetup;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
+
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -56,6 +59,16 @@ public class MemberApiTest extends IntegrationTest {
         resultActions
                 .andExpect(status().isBadRequest())
         ;
+
+    }
+
+    @Test
+    public void name() {
+
+
+
+
+
 
     }
 

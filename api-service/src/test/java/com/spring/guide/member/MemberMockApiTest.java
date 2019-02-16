@@ -6,7 +6,7 @@ import com.spring.guide.member.dto.SignUpRequestBuilder;
 import com.spring.guide.member.service.MemberSignUpService;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
-import com.spring.guide.utile.MockMvcTest;
+import com.spring.guide.utile.MockApiTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MemberApi.class)
-public class MemberMockApiTest extends MockMvcTest {
+public class MemberMockApiTest extends MockApiTest {
 
     @Autowired
     private WebApplicationContext context;

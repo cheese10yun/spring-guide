@@ -30,7 +30,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 @ContextConfiguration(classes = ApiApp.class)
 @ActiveProfiles(profiles = "test")
 @Ignore
-public class MockMvcTest {
+public class MockApiTest {
 
     @Autowired
     protected ResourceLoader resourceLoader;
