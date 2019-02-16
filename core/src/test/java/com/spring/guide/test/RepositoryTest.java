@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @ActiveProfiles(TestProfile.TEST)
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 @Ignore
 public class RepositoryTest {
 }

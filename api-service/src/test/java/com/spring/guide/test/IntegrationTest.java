@@ -31,7 +31,7 @@ import java.io.InputStream;
 //        MemberSetup.class
 })
 @ActiveProfiles(TestProfile.TEST)
-@Transactional
+//@Transactional
 @Ignore
 public class IntegrationTest {
 
