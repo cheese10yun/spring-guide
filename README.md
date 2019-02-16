@@ -1,11 +1,15 @@
-# Test Guide
+# Spring Guide
 
-스프링은 다양한 테스트 전략을 제공하고 있습니다. 대표적으로 Slice Test 라는 것으로 특정 레이어에 대해서 Bean을 최소한으로 등록시켜 테스트 하고자 하는 부분에 최대한 단위 테스트를 지원합니다. 다양하게 지원해주는 만큼 테스트 코드를 통일성 있게 관리하는 것이 중요합니다. 더 안전하고 통일성 있게 테스트를 진행하는 방법에 대해서 제 나름의 노하우를 정리해보았습니다.
+# 소개
+스프링을 보다 유지보수하기 좋은 코드를 만들기 위해서 평소 생각했던 가이드를 연재하려고 합니다. 테스트 코드, 예외처리, 올바른 서비스의 크기, 프로젝트 구조등에 대해서 주로 다룰 예정 입니다. Start, Watching 버튼을 누르시면 구독 신청받으실 수 있습니다. 저의 경험이 여러분에게 조금이라도 도움이 되기를 기원합니다.
 
 # 목차
 
-- [Test Guide](#test-guide)
+- [Spring Guide](#spring-guide)
+- [소개](#%EC%86%8C%EA%B0%9C)
 - [목차](#%EB%AA%A9%EC%B0%A8)
+- [프로젝트 실행 방법](#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%8B%A4%ED%96%89-%EB%B0%A9%EB%B2%95)
+- [Test Guide](#test-guide)
 - [테스트 전략](#%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A0%84%EB%9E%B5)
 - [통합테스트](#%ED%86%B5%ED%95%A9%ED%85%8C%EC%8A%A4%ED%8A%B8)
   - [장점](#%EC%9E%A5%EC%A0%90)
@@ -37,6 +41,20 @@
     - [Embeddable](#embeddable)
     - [Test Code](#test-code-3)
 - [마무리](#%EB%A7%88%EB%AC%B4%EB%A6%AC)
+
+
+# 프로젝트 실행 방법
+```bash
+$ git clone git@github.com:cheese10yun/spring-guide.git
+$ cd spring-guide
+$ docker-compose up -d
+$ ./mvnw clean package
+$ java -jar -Dspring.profiles.active=local api-service/target/api-service-0.0.1-SNAPSHOT.jar
+```
+
+# Test Guide
+
+스프링은 다양한 테스트 전략을 제공하고 있습니다. 대표적으로 Slice Test 라는 것으로 특정 레이어에 대해서 Bean을 최소한으로 등록시켜 테스트 하고자 하는 부분에 최대한 단위 테스트를 지원합니다. 다양하게 지원해주는 만큼 테스트 코드를 통일성 있게 관리하는 것이 중요합니다. 더 안전하고 통일성 있게 테스트를 진행하는 방법에 대해서 제 나름의 노하우를 정리해보았습니다.
 
 
 
@@ -458,3 +476,7 @@ public class NameTest {
 
 # 마무리
 각자의 프로젝트 환경이 다르기 때문에 어느 한방 법이 Best Practice라고 말하는 게 어렵습니다. 그래도 테스트 코드의 중요성은 이미 많은 개발자가 공감하고 있는 만큼 보다 효율적인 테스트 코드 환경을 구축하려는 노력이 많이 선행되어야 한다고 생각합니다.
+
+
+
+
