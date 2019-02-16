@@ -3,7 +3,7 @@ spring:
     database: mysql
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate.format_sql: true
