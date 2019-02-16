@@ -11,7 +11,7 @@ spring:
         use_sql_comments: true
 
   datasource:
-    url: jdbc:mysql://localhost:3306/guide?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:33060/guide?useSSL=false&serverTimezone=UTC
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
