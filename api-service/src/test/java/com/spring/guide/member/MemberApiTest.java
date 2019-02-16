@@ -2,16 +2,19 @@ package com.spring.guide.member;
 
 import com.spring.guide.domain.member.Member;
 import com.spring.guide.excpetion.ErrorCode;
+import com.spring.guide.member.dto.MemberProfileUpdate;
 import com.spring.guide.member.dto.SignUpRequest;
 import com.spring.guide.member.dto.SignUpRequestBuilder;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
 import com.spring.guide.test.IntegrationTest;
-import com.spring.guide.test.setup.MemberSetup;
+import com.spring.guide.test.setup.domain.MemberSetup;
+import com.spring.guide.test.setup.request.MemberProfileUpdateBuilder;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -104,6 +107,29 @@ public class MemberApiTest extends IntegrationTest {
                 .andExpect(jsonPath("errors").isEmpty())
         ;
 
+    }
+
+    @Test
+    public void 회원_프로필_업데이트() throws Exception {
+        //given
+        final Member member = memberSetup.save();
+        final MemberProfileUpdate dto = MemberProfileUpdateBuilder.build();
+
+        //when
+
+        final ResultActions resultActions = requestUpdateProfile(dto, member.getId());
+
+        //then
+        resultActions
+                .andExpect(status().isOk());
+
+    }
+
+    private ResultActions requestUpdateProfile(final MemberProfileUpdate dto, final long id) throws Exception {
+        return mvc.perform(MockMvcRequestBuilders.put("/members/{id}/profile", id)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(dto)))
+                .andDo(print());
     }
 
     private ResultActions requestGetMember(long memberId) throws Exception {

@@ -1,4 +1,4 @@
-package com.spring.guide.test.setup;
+package com.spring.guide.test.setup.domain;
 
 
 import com.spring.guide.domain.member.Member;

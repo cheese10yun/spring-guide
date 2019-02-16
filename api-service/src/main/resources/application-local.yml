@@ -11,11 +11,10 @@ spring:
         use_sql_comments: true
 
   datasource:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/guide?useSSL=false&serverTimezone=UTC
-      username: root
-      password:
-      driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guide?useSSL=false&serverTimezone=UTC
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 logging:
   level:

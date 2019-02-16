@@ -19,6 +19,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
     private Long id;
 
     @Embedded
@@ -44,6 +45,10 @@ public class Member {
     @Builder
     public Member(Email email, Name name) {
         this.email = email;
+        this.name = name;
+    }
+
+    public void updateProfile(final Name name) {
         this.name = name;
     }
 }

@@ -5,7 +5,7 @@ import com.google.common.base.Charsets;
 import com.google.common.io.ByteSource;
 import com.spring.guide.ApiApp;
 import com.spring.guide.test.config.TestProfile;
-import com.spring.guide.test.setup.MemberSetup;
+import com.spring.guide.test.setup.domain.MemberSetup;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import java.io.InputStream;
 //        MemberSetup.class
 })
 @ActiveProfiles(TestProfile.TEST)
-//@Transactional
+@Transactional
 @Ignore
 public class IntegrationTest {
 

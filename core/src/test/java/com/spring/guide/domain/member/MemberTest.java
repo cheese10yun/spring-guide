@@ -2,6 +2,7 @@ package com.spring.guide.domain.member;
 
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
+import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -27,7 +28,24 @@ public class MemberTest {
         assertThat(member.getName().getFirst()).isEqualTo("first");
         assertThat(member.getName().getMiddle()).isEqualTo("middle");
         assertThat(member.getName().getLast()).isEqualTo("last");
+    }
 
+    @Test
+    public void updateProfile() {
+
+        final Member member = MemberBuilder.build();
+        final Name name = Name.builder()
+                .first("fff")
+                .middle("mmm")
+                .last("lll")
+                .build();
+
+        member.updateProfile(name);
+
+        assertThat(member.getName().getFirst()).isEqualTo(name.getFirst());
+        assertThat(member.getName().getFullName()).isEqualTo(name.getFullName());
+        assertThat(member.getName().getMiddle()).isEqualTo(name.getMiddle());
+        assertThat(member.getName().getLast()).isEqualTo(name.getLast());
     }
 
     @Test
