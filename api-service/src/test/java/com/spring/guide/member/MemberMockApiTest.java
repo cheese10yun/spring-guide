@@ -1,12 +1,13 @@
 package com.spring.guide.member;
 
 import com.spring.guide.domain.member.Member;
+import com.spring.guide.domain.member.MemberHelperService;
 import com.spring.guide.member.dto.SignUpRequest;
 import com.spring.guide.member.dto.SignUpRequestBuilder;
 import com.spring.guide.member.service.MemberSignUpService;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
-import com.spring.guide.utile.MockApiTest;
+import com.spring.guide.test.MockApiTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class MemberMockApiTest extends MockApiTest {
 
     @MockBean
     private MemberSignUpService memberSignUpService;
+
+    @MockBean
+    private MemberHelperService memberHelperService;
 
     @Before
     public void setUp() {

@@ -1,13 +1,12 @@
-package com.spring.guide.utile.setup;
+package com.spring.guide.test.setup;
 
 
 import com.spring.guide.domain.member.Member;
 import com.spring.guide.domain.member.MemberRepository;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
+import com.spring.guide.test.config.TestProfile;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-@Profile("test")
+@Profile(TestProfile.TEST)
 @RequiredArgsConstructor
-@TestConfiguration
+@Component
 public class MemberSetup {
 
     private final MemberRepository memberRepository;
@@ -35,6 +34,9 @@ public class MemberSetup {
         return members;
     }
 
+    public Member build(){
+        return buildMember("yun@test.com");
+    }
 
     private Member buildMember(String email) {
         return Member.builder()

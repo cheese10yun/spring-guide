@@ -1,10 +1,10 @@
 package com.spring.guide.domain.member;
 
 import com.spring.guide.model.Email;
-import com.spring.guide.utile.setup.model.EmailBuilder;
+import com.spring.guide.test.setup.model.EmailBuilder;
 import com.spring.guide.model.Name;
-import com.spring.guide.utile.setup.model.NameBuilder;
-import com.spring.guide.utile.RepositoryTest;
+import com.spring.guide.test.setup.model.NameBuilder;
+import com.spring.guide.test.RepositoryTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,11 @@
-package com.spring.guide.utile;
+package com.spring.guide.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import com.google.common.io.ByteSource;
 import com.spring.guide.ApiApp;
-import com.spring.guide.utile.setup.MemberSetup;
+import com.spring.guide.test.config.TestProfile;
+import com.spring.guide.test.setup.MemberSetup;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,10 @@ import java.io.InputStream;
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @Import({
-        RestDocsConfiguration.class,
-        MemberSetup.class
+        RestDocsConfiguration.class
+//        MemberSetup.class
 })
-@ActiveProfiles("test")
+@ActiveProfiles(TestProfile.TEST)
 @Transactional
 @Ignore
 public class IntegrationTest {

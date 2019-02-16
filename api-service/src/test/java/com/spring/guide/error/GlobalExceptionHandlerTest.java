@@ -1,7 +1,7 @@
 package com.spring.guide.error;
 
 import com.spring.guide.excpetion.ErrorCode;
-import com.spring.guide.utile.IntegrationTest;
+import com.spring.guide.test.IntegrationTest;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;

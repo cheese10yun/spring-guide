@@ -1,4 +1,4 @@
-package com.spring.guide.utile.setup.model;
+package com.spring.guide.test.setup.model;
 
 import com.spring.guide.model.Address;
 

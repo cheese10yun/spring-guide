@@ -1,10 +1,11 @@
-package com.spring.guide.utile;
+package com.spring.guide.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.common.base.Charsets;
 import com.google.common.io.ByteSource;
 import com.spring.guide.ApiApp;
+import com.spring.guide.test.config.TestProfile;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ApiApp.class)
-@ActiveProfiles(profiles = "test")
+@ActiveProfiles(TestProfile.TEST)
 @Ignore
 public class MockApiTest {
 

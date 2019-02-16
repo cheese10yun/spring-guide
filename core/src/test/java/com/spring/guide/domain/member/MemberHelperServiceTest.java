@@ -2,7 +2,7 @@ package com.spring.guide.domain.member;
 
 import com.spring.guide.domain.member.exception.EmailNotFoundException;
 import com.spring.guide.domain.member.exception.MemberNotFoundException;
-import com.spring.guide.utile.MockTest;
+import com.spring.guide.test.MockTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

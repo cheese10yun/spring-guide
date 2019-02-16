@@ -8,7 +8,7 @@ import com.spring.guide.member.dto.SignUpRequestBuilder;
 import com.spring.guide.member.exception.EmailDuplicateException;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
-import com.spring.guide.utile.MockTest;
+import com.spring.guide.test.MockTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
