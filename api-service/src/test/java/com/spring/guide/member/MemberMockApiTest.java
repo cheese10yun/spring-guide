@@ -4,6 +4,7 @@ import com.spring.guide.domain.member.Member;
 import com.spring.guide.domain.member.MemberHelperService;
 import com.spring.guide.member.dto.SignUpRequest;
 import com.spring.guide.member.dto.SignUpRequestBuilder;
+import com.spring.guide.member.service.MemberProfileService;
 import com.spring.guide.member.service.MemberSignUpService;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
@@ -35,6 +36,10 @@ public class MemberMockApiTest extends MockApiTest {
 
     @MockBean
     private MemberHelperService memberHelperService;
+
+    @MockBean
+    private MemberProfileService memberProfileService;
+
 
     @Before
     public void setUp() {
