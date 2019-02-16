@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: guide.mysql
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: "guide"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "33060:3306"
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
