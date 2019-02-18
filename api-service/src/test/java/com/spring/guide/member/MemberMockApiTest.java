@@ -40,6 +40,9 @@ public class MemberMockApiTest extends MockApiTest {
     @MockBean
     private MemberProfileService memberProfileService;
 
+    @MockBean
+    private MemberSearchService memberSearchService;
+
 
     @Before
     public void setUp() {

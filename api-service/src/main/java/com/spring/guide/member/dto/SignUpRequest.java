@@ -1,6 +1,7 @@
 package com.spring.guide.member.dto;
 
 import com.spring.guide.domain.member.Member;
+import com.spring.guide.domain.member.ReferralCode;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
 import lombok.AccessLevel;
@@ -24,10 +25,11 @@ public class SignUpRequest {
         this.name = name;
     }
 
-    public Member toEntity() {
+    public Member toEntity(final ReferralCode referralCode) {
         return Member.builder()
                 .name(name)
                 .email(email)
+                .referralCode(referralCode)
                 .build();
     }
 }

@@ -3,6 +3,7 @@ package com.spring.guide.test.setup.domain;
 
 import com.spring.guide.domain.member.Member;
 import com.spring.guide.domain.member.MemberRepository;
+import com.spring.guide.domain.member.ReferralCode;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
 import com.spring.guide.test.config.TestProfile;
@@ -46,6 +47,7 @@ public class MemberSetup {
                         .middle("middle")
                         .last("last")
                         .build())
+                .referralCode(ReferralCode.generateCode())
                 .build();
     }
 
