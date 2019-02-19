@@ -2,6 +2,7 @@ package com.spring.guide.member.service;
 
 import com.spring.guide.domain.member.Member;
 import com.spring.guide.domain.member.MemberRepository;
+import com.spring.guide.domain.member.ReferralCode;
 import com.spring.guide.member.dto.SignUpRequest;
 import com.spring.guide.member.exception.EmailDuplicateException;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,17 @@ public class MemberSignUpService {
             throw new EmailDuplicateException(dto.getEmail());
         }
 
-        return memberRepository.save(dto.toEntity());
+        final ReferralCode referralCode = generateUniqueReferralCode();
+        return memberRepository.save(dto.toEntity(referralCode));
+    }
+
+    private ReferralCode generateUniqueReferralCode() {
+        ReferralCode referralCode;
+        do {
+            referralCode = ReferralCode.generateCode();
+        } while (memberRepository.existsByReferralCode(referralCode));
+
+        return referralCode;
     }
 
 }

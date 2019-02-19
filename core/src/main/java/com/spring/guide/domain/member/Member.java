@@ -27,6 +27,10 @@ public class Member {
     private Email email;
 
     @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "referral_code", nullable = false, unique = true, updatable = false, length = 50))
+    private ReferralCode referralCode;
+
+    @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "first", column = @Column(name = "first_name", nullable = false)),
             @AttributeOverride(name = "middle", column = @Column(name = "middle_name")),
@@ -43,8 +47,9 @@ public class Member {
     private LocalDateTime updateAt;
 
     @Builder
-    public Member(Email email, Name name) {
+    public Member(Email email, ReferralCode referralCode, Name name) {
         this.email = email;
+        this.referralCode = referralCode;
         this.name = name;
     }
 

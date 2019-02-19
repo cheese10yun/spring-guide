@@ -51,7 +51,7 @@ public class ErrorResponse {
     public static ErrorResponse of(MethodArgumentTypeMismatchException e) {
         final String value = e.getValue() == null ? "" : e.getValue().toString();
         final List<ErrorResponse.FieldError> errors = ErrorResponse.FieldError.of(e.getName(), value, e.getErrorCode());
-        return new ErrorResponse(ErrorCode.INVALID_INPUT_VALUE, errors);
+        return new ErrorResponse(ErrorCode.INVALID_TYPE_VALUE, errors);
     }
 
 

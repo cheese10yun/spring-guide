@@ -3,8 +3,6 @@ package com.spring.guide.domain.member;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 
 public class MemberBuilder {
 
@@ -12,17 +10,20 @@ public class MemberBuilder {
         final String value = "cheese10yun@gmail.com";
         final Email email = Email.of(value);
         final Name name = nameBuild();
-        return createMember(email, name);
+        final ReferralCode referralCode = ReferralCode.generateCode();
+        return createMember(email, name, referralCode);
     }
 
     public static Member build(Email email, Name name) {
-        return createMember(email, name);
+        final ReferralCode referralCode = ReferralCode.generateCode();
+        return createMember(email, name, referralCode);
     }
 
-    private static Member createMember(Email email, Name name) {
+    private static Member createMember(Email email, Name name, ReferralCode referralCode) {
         return Member.builder()
                 .email(email)
                 .name(name)
+                .referralCode(referralCode)
                 .build();
     }
 

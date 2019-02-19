@@ -11,4 +11,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     boolean existsByEmail(Email email);
 
+    boolean existsByReferralCode(ReferralCode referralCode);
+
 }

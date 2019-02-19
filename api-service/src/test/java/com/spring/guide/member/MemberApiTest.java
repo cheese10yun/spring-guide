@@ -1,10 +1,12 @@
 package com.spring.guide.member;
 
 import com.spring.guide.domain.member.Member;
+import com.spring.guide.domain.member.ReferralCode;
 import com.spring.guide.excpetion.ErrorCode;
 import com.spring.guide.member.dto.MemberProfileUpdate;
 import com.spring.guide.member.dto.SignUpRequest;
 import com.spring.guide.member.dto.SignUpRequestBuilder;
+import com.spring.guide.member.type.MemberExistenceType;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
 import com.spring.guide.test.IntegrationTest;
@@ -55,7 +57,7 @@ public class MemberApiTest extends IntegrationTest {
     @Test
     public void 회원가입_유효하지않은_입력값() throws Exception {
         //given
-        final Email email = Email.of("asdasd@d");
+        final Email email = Email.of("asdasd@dasd.com");
         final Name name = Name.builder().build();
 
         final SignUpRequest dto = SignUpRequestBuilder.build(email, name);
@@ -123,6 +125,78 @@ public class MemberApiTest extends IntegrationTest {
         resultActions
                 .andExpect(status().isOk());
 
+    }
+
+    @Test
+    public void 이메일_존재_있을_경우() throws Exception {
+        //given
+        final MemberExistenceType type = MemberExistenceType.EMAIL;
+        final Member member = memberSetup.save();
+        final String email = member.getEmail().getValue();
+
+        //when
+        final ResultActions resultActions = requestExistenceTarget(type, email);
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("existence").value(true));
+
+    }
+
+    @Test
+    public void 이메일_존재_없을_경우() throws Exception {
+        //given
+        final MemberExistenceType type = MemberExistenceType.EMAIL;
+        final String email = Email.of("asdasdaasd@asdasdasd.com").getValue();
+
+        //when
+        final ResultActions resultActions = requestExistenceTarget(type, email);
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("existence").value(false));
+    }
+
+    @Test
+    public void 추천인_존재_있을_경우() throws Exception {
+        //given
+        final MemberExistenceType type = MemberExistenceType.REFERRAL_CODE;
+        final Member member = memberSetup.save();
+        final String code = member.getReferralCode().getValue();
+
+        //when
+        final ResultActions resultActions = requestExistenceTarget(type, code);
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("existence").value(true));
+
+    }
+
+    @Test
+    public void 추천인_존재_없을_경우() throws Exception {
+        //given
+        final MemberExistenceType type = MemberExistenceType.REFERRAL_CODE;
+        final String code = ReferralCode.of("123123").getValue();
+
+        //when
+        final ResultActions resultActions = requestExistenceTarget(type, code);
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("existence").value(false));
+    }
+
+    private ResultActions requestExistenceTarget(MemberExistenceType type, String value) throws Exception {
+        return mvc.perform(get("/members/existence")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .param("type", type.name())
+                .param("value", value))
+                .andDo(print());
     }
 
     private ResultActions requestUpdateProfile(final MemberProfileUpdate dto, final long id) throws Exception {
