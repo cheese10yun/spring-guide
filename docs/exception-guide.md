@@ -209,8 +209,122 @@ public enum ErrorCode {
 에러 코드가 전체적으로 흩어져있을 경우 코드, 메시지의 중복을 방지하기 어렵고 전체적으로 관리하는 것이 매우 어렵습니다. `C001` 같은 코드도 동일하게 enum으로 관리리 하는 것도 좋습니다. 에러 메시지는 Common과 각 도메인 별로 관리하는 것이 효율적일거 같습니다.
 
 # Business Exception 처리
+여기서 말하는 Business Exception은 요구사항에 맞지 않을 경우 발생히키는 Exception을 말합니다. 만약 쿠폰을 사용 하려고 하는데 이미 사용한 쿠폰인 경우에는 더 이상 정상적인 흐름을 이어갈수가 없게 됩니다. 이런 경우에는 적절한 Exception을 발생시키고 로직을 종료 시켜야합니다.
+
+더 쉽게 정리하면 요구사항에 맞게 개발자가 직접 Exception을 발생시키는 것들이 Business Exception 이라고 할수 있습니다. 
+
+유지보수하기 좋은 코드를 만들기 위해서는 Exception을 발생시켜야합니다. 쿠폰을 입력해서 상품을 주문했을 경우 상품 계산 로직에서 이미 사용 해버린 쿠폰인 경우 로직을 이어나가기는 어렵습니다.
+
+단순히 어려운것이 아니라 해당 계산 로직의 책임이 증가하게 됩니다. 계산 로직은 특정 공식에 의해서 제품의 가격을 계산하는 것이 책임이지 쿠폰이 이미 사용했 경우, 쿠폰이 만료되었을 경우, 제품이 매진 됬을 경우 등등의 책임을 갖게 되는 순간 유지보수하기 어려운 코드가 됩니다. 객체의 적절한 책임을 주기 위해서라도 본인이 처리 못하는 상황일 경우 적절한 Exception을 발생시켜야 합니다.
+
+> 클린 코드 : 오류 코드 보다 예외를 사용하라 리팩토링
+
+```java
+public class DeviceController {
+    ...
+    public void sendShutDown() {
+        DeviceHandle handle = getHandle(DEV1);
+        // 디바이스 상태를 점검한댜.
+        if (handle != DeviceHandle.INVALID) {
+            // 레코드 필드에 디바이스 상태를 저장한다.
+            retrieveDeviceRecord(handle);
+            // 디바이스가 일시정지 상태가 아니라면 종료한다.
+            if (record.getStatus() != DEVICE_SUSPENDED) {
+                pauseDevice(handle);
+                clearDeviceWorkQueue(handle);
+                closeDevice(handle);
+            } else {
+                logger.log("Device suspended. Unable to shut down");
+            }
+        } else {
+            logger.log("Invalid handle for: " + DEV1.toString());
+        }
+    }
+    ...
+}
+```
+`if ... else`의 반복으로 인해서 sendShutDown 핵심 비지니스 코드의 이해하기가 어렵습니다.
+
+```java
+public class DeviceController {
+    ...
+    public void sendShutDown() {
+        try {
+            tryToShutDown();
+        } catch (DeviceShutDownError e) {
+            logger.log(e);
+        }
+    }
+
+    private void tryToShutDown() throws DeviceShutDownError {
+        DeviceHandle handle = getHandle(DEV1);
+        DeviceRecord record = retrieveDeviceRecord(handle);
+        pauseDevice(handle);
+        clearDeviceWorkQueue(handle);
+        closeDevice(handle);
+    }
+
+    private DeviceHandle getHandle(DeviceID id) {
+        ...
+        throw new DeviceShutDownError("Invalid handle for: " + id.toString());
+        ...
+    }
+    ...
+}
+```
+객체 본인의 책임 외적인 것들은 DeviceShutDownError 예외를 발생 시키고 있습니다. 코드의 가독성과 책임이 분명하게 드러나고 있습니다.
+
+## 비지니스 예외를 위한 최상위 BusinessException 클래스
+
+![](/docs/imgs/BusinessException-final.png)
+
+최상위 BusinessException을 상속 받는 InvalidValueException, EntityNotFoundExceptuon 등이 있습니다.
+
+* InvalidValueException : 유효하지 않은 값일 경우 예외를 던지는 Excetion
+  * 쿠폰 만료, 이미 사용한 쿠폰 등의 이유로 더이상 진행이 못할경우
+* EntityNotFoundException : 각 엔티티들을 못찾았을 경우 
+  * `findById`, `findByCode` 메서드에서 조회가 안되었을 경우
+
+최상위 BusinessException을 기준으로 예외를 발생시키면 통일감 있는 예외 처리를 가질 수 있습니다. 비니지스 로직을 수행하는 코드 흐름에서 로직의 흐름을 진행할 수 없는 상태인 경우에는 적절한 BusinessException 중에 하나를 예외를 발생 시키거나 직접 정의하게 됩니다.
+
+```java
+@ExceptionHandler(BusinessException.class)
+protected ResponseEntity<ErrorResponse> handleBusinessException(final BusinessException e) {
+    log.error("handleEntityNotFoundException", e);
+    final ErrorCode errorCode = e.getErrorCode();
+    final ErrorResponse response = ErrorResponse.of(errorCode);
+    return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
+}
+```
+이렇게 발생하는 모든 예외는 `handleBusinessException` 에서 동일하게 핸들링 됩니다. 예외 발생시 알람을 받는 등의 추가적인 행위도 손쉽게 가능합니다. 또 BusinessException 클래스의 하위 클래스 중에서 특정 예외에 대해서 다른 알람을 받는 등의 더 디테일한 헨들링도 가능해집니다. 
 
 
+## Coupon Code
+
+```java
+public class Coupon {
+
+    ...
+
+    public void use() {
+        verifyExpiration();
+        verifyUsed();
+        this.used = true;
+    }
+
+    private void verifyUsed() {
+        if (used) throw new CouponAlreadyUseException();
+    }
+
+    private void verifyExpiration() {
+        if (LocalDate.now().isAfter(getExpirationDate())) throw new CouponExpireException();
+    }
+}
+```
+쿠폰의 `use` 메서드입니다. 만료일과, 사용여부를 확인하고 예외가 발생하면 Exception을 발생시킵니다.
+
+
+# 컨트롤러 예외 처리
 
 
 
