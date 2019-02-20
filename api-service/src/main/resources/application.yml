@@ -3,4 +3,4 @@ spring:
     active: local
 
 server:
-  port: 8787
+  port: 8899
