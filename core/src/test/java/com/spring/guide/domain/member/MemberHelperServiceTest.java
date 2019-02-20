@@ -10,7 +10,6 @@ import org.mockito.Mock;
 
 import java.util.Optional;
 
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -71,5 +70,16 @@ public class MemberHelperServiceTest extends MockTest {
 
         //when
         memberHelperService.findByEmail(member.getEmail());
+    }
+
+    @Test
+    public void try_test() {
+
+        try {
+            // 비지니스 로직 수행...
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

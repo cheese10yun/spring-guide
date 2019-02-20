@@ -80,8 +80,7 @@ public class ErrorResponse {
                     .map(error -> new FieldError(
                             error.getField(),
                             error.getRejectedValue() == null ? "" : error.getRejectedValue().toString(),
-                            error.getDefaultMessage())
-                    )
+                            error.getDefaultMessage()))
                     .collect(Collectors.toList());
         }
     }
