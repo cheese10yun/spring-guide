@@ -39,5 +39,5 @@ jobs:
 
       # run tests!
       - run:
-          - docker-compose up -d
+          #          - docker-compose up -d
           - mvn integration-test
