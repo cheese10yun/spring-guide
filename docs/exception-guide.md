@@ -5,8 +5,8 @@
 - [Exception Guide](#exception-guide)
 - [목차](#%EB%AA%A9%EC%B0%A8)
 - [통일된 Error Response 객체](#%ED%86%B5%EC%9D%BC%EB%90%9C-error-response-%EA%B0%9D%EC%B2%B4)
-  - [Error Reponse JSON](#error-reponse-json)
-  - [Error Reponse 객체](#error-reponse-%EA%B0%9D%EC%B2%B4)
+  - [Error Response JSON](#error-response-json)
+  - [Error Response 객체](#error-response-%EA%B0%9D%EC%B2%B4)
 - [@ControllerAdvice 모든 예외를 헨들링](#controlleradvice-%EB%AA%A8%EB%93%A0-%EC%98%88%EC%99%B8%EB%A5%BC-%ED%97%A8%EB%93%A4%EB%A7%81)
 - [Error Code 정의](#error-code-%EC%A0%95%EC%9D%98)
 - [Business Exception 처리](#business-exception-%EC%B2%98%EB%A6%AC)
@@ -14,11 +14,11 @@
   - [Coupon Code](#coupon-code)
 - [컨트롤러 예외 처리](#%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC-%EC%98%88%EC%99%B8-%EC%B2%98%EB%A6%AC)
   - [Controller](#controller)
-- [Tray Catch 전략](#tray-catch-%EC%A0%84%EB%9E%B5)
+- [Try Catch 전략](#try-catch-%EC%A0%84%EB%9E%B5)
 
 # 통일된 Error Response 객체
 
-Error Reponse 객체는 항상 동일한 Error Response를 가져야 합니다. 그렇지 않으면 클라이언트에서 예외 처리를 항상 동일한 로직으로 처라하기 어렵습니다. Error Response 객체를 유연하게 처리하기 위해서 간혹 `Map&ampltKey, Value&ampgt` 형식으로 처리하는데 이는 좋지 않다고 생각합니다. 우선 Map 이라는 친구는 런타입시에 정확한 형태를 갖추기 때문에 객체를 처리하는 개발자들도 정확히 무슨 키에 무슨 데이터가 있는지 확인하기 어렵습니다.
+Error Response 객체는 항상 동일한 Error Response를 가져야 합니다. 그렇지 않으면 클라이언트에서 예외 처리를 항상 동일한 로직으로 처라하기 어렵습니다. Error Response 객체를 유연하게 처리하기 위해서 간혹 `Map<Key, Value>` 형식으로 처리하는데 이는 좋지 않다고 생각합니다. 우선 Map 이라는 친구는 런타입시에 정확한 형태를 갖추기 때문에 객체를 처리하는 개발자들도 정확히 무슨 키에 무슨 데이터가 있는지 확인하기 어렵습니다.
 
 ```java
 @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -28,9 +28,9 @@ protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(Me
     return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 }
 ```
-위 예제 코드처럼 리턴 타입이 `ResponseEntity&ampltErrorResponse&ampgt` 으로 무슨 데이터가 어떻게 있는지 명확하게 추론하기 쉽도록 구성하는 게 바람직합니다.
+위 예제 코드처럼 리턴 타입이 `ResponseEntity<ErrorResponse>` 으로 무슨 데이터가 어떻게 있는지 명확하게 추론하기 쉽도록 구성하는 게 바람직합니다.
 
-## Error Reponse JSON
+## Error Response JSON
 ```json
 {
   "message": " Invalid Input Value",
@@ -59,7 +59,7 @@ ErrorResponse 객체의 JSON 입니다.
 * code : 에러에 할당되는 유니크한 코드값입니다.
 
 
-## Error Reponse 객체
+## Error Response 객체
 
 ```java
 @Getter
@@ -82,7 +82,7 @@ public class ErrorResponse {
     }
 }
 ```
-ErrorResponse 객체에 입니다. POJO 객체로 관리하면 `errorReponse.getXXX();` 이렇게 명확하게 객체에 있는 값을 가져올 수 있습니다. 그 밖에 특정 Exception에 대해서 ErrorReponse 객체를 어떻게 만들 것인가에 대한 책임을 명확하게 갖는 구조로 설계할 수 있습니다. 세부적인 것은 코드를 확인해주세요
+ErrorResponse 객체에 입니다. POJO 객체로 관리하면 `errorResponse.getXXX();` 이렇게 명확하게 객체에 있는 값을 가져올 수 있습니다. 그 밖에 특정 Exception에 대해서 ErrorResponse 객체를 어떻게 만들 것인가에 대한 책임을 명확하게 갖는 구조로 설계할 수 있습니다. 세부적인 것은 코드를 확인해주세요
 
 # @ControllerAdvice 모든 예외를 헨들링
 
@@ -185,7 +185,7 @@ public class GlobalExceptionHandler {
   * 비지니스 요규사항에 따른 Exception
   * 아래에서 자세한 설명 진행
 
-추가로 스프링 및 라이브러리 등 자체적으로 발생하는 예외는 `@ExceptionHandler` 으로 추가해서 적절한 Error Reponse를 만들고 **비지니스 요구사항에 예외일 경우 `BusinessException` 으로 통일성 있게 처리하는 것을 목표로 한다. 추가로 늘어날 수는 있겠지만 그 개수를 최소한으로 하는 노력이 필요합니다.**
+추가로 스프링 및 라이브러리 등 자체적으로 발생하는 예외는 `@ExceptionHandler` 으로 추가해서 적절한 Error Response를 만들고 **비지니스 요구사항에 예외일 경우 `BusinessException` 으로 통일성 있게 처리하는 것을 목표로 한다. 추가로 늘어날 수는 있겠지만 그 개수를 최소한으로 하는 노력이 필요합니다.**
 
 
 # Error Code 정의
@@ -375,7 +375,7 @@ public class Email {
 
 회원 가입 Reuqest Body 중에서 유효하지 않은 값이 있을 때 `@Valide` 어노테이션으로 예외를 발생하게 됩니다. 이 발생한 예외는 `@ControllerAdvice`에서 적절하게 핸들링 됩니다. `@NotEmpty`, `@Email` 외에도 다양한 어노테이션들이 제공됩니다.
 
-# Tray Catch 전략
+# Try Catch 전략
 기본적으로 예외가 발생하면 로직의 흐름을 끊고 종료 시켜야 합니다물론 예외도 있지만, 최대한 예외를 발생시켜 종료하는 것을 지향해야 한다고 생각합니다.)
 
 ```java
