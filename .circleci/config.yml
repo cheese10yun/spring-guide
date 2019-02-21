@@ -7,7 +7,7 @@ jobs:
         environment:
           - MYSQL_ROOT_HOST=%
           - MYSQL_DATABASE=guide
-          - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+          - MYSQL_ALLOW_EMPTY_PASSWORD=yes
           - DB_PORT=33060
 
 
