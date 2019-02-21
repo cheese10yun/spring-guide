@@ -1,5 +1,5 @@
 # Exception Guide
-스프링은 예외처리를 위한 다양한 어노테이션을 막강한 어노테이션을 제공해주고 있습니다. 일관성 있는 코드 스타일을 유지하면서 Exception을 처리하는 방법에 대해서 소개하겠습니다.
+스프링은 예외처리를 위해 다양하고 막강한 어노테이션을 제공하고 있습니다. 일관성 있는 코드 스타일을 유지하면서 Exception을 처리하는 방법에 대해서 소개하겠습니다.
 
 # 목차
 - [Exception Guide](#exception-guide)
@@ -7,7 +7,7 @@
 - [통일된 Error Response 객체](#%ED%86%B5%EC%9D%BC%EB%90%9C-error-response-%EA%B0%9D%EC%B2%B4)
   - [Error Reponse JSON](#error-reponse-json)
   - [Error Reponse 객체](#error-reponse-%EA%B0%9D%EC%B2%B4)
-- [@ControllerAdvice 모든 예외를 헨들링](#controlleradvice-%EB%AA%A8%EB%93%A0-%EC%98%88%EC%99%B8%EB%A5%BC-%ED%97%A8%EB%93%A4%EB%A7%81)
+- [@ControllerAdvice로 모든 예외를 핸들링](#controlleradvice-%EB%AA%A8%EB%93%A0-%EC%98%88%EC%99%B8%EB%A5%BC-%ED%97%A8%EB%93%A4%EB%A7%81)
 - [Error Code 정의](#error-code-%EC%A0%95%EC%9D%98)
 - [Business Exception 처리](#business-exception-%EC%B2%98%EB%A6%AC)
   - [비지니스 예외를 위한 최상위 BusinessException 클래스](#%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4-%EC%98%88%EC%99%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%B5%9C%EC%83%81%EC%9C%84-businessexception-%ED%81%B4%EB%9E%98%EC%8A%A4)
@@ -18,7 +18,7 @@
 
 # 통일된 Error Response 객체
 
-Error Reponse 객체는 항상 동일한 Error Response를 가져야 합니다. 그렇지 않으면 클라이언트에서 예외 처리를 항상 동일한 로직으로 처라하기 어렵습니다. Error Response 객체를 유연하게 처리하기 위해서 간혹 `Map&ampltKey, Value&ampgt` 형식으로 처리하는데 이는 좋지 않다고 생각합니다. 우선 Map 이라는 친구는 런타입시에 정확한 형태를 갖추기 때문에 객체를 처리하는 개발자들도 정확히 무슨 키에 무슨 데이터가 있는지 확인하기 어렵습니다.
+Error Reponse 객체는 항상 동일한 Error Response를 가져야 합니다. 그렇지 않으면 클라이언트에서 예외 처리를 항상 동일한 로직으로 처리하기 어렵습니다. Error Response 객체를 유연하게 처리하기 위해서 간혹 `Map<Key, Value>` 형식으로 처리하는데 이는 좋지 않다고 생각합니다. 우선 Map 이라는 친구는 런타입시에 정확한 형태를 갖추기 때문에 객체를 처리하는 개발자들도 정확히 무슨 키에 무슨 데이터가 있는지 확인하기 어렵습니다.
 
 ```java
 @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -28,14 +28,14 @@ protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(Me
     return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 }
 ```
-위 예제 코드처럼 리턴 타입이 `ResponseEntity&ampltErrorResponse&ampgt` 으로 무슨 데이터가 어떻게 있는지 명확하게 추론하기 쉽도록 구성하는 게 바람직합니다.
+위 예제 코드처럼 리턴 타입이 `ResponseEntity<ErrorResponse>` 으로 무슨 데이터가 어떻게 있는지 명확하게 추론하기 쉽도록 구성하는 게 바람직합니다.
 
 ## Error Reponse JSON
 ```json
 {
   "message": " Invalid Input Value",
   "status": 400,
-  // "errors":[], 비어있을 경우 null 이 아닌 빈 배열을 응답한다.
+  "errors":[], // 비어있을 경우 null 이 아닌 빈 배열을 응답한다.
   "errors": [
     {
       "field": "name.last",
@@ -82,9 +82,9 @@ public class ErrorResponse {
     }
 }
 ```
-ErrorResponse 객체에 입니다. POJO 객체로 관리하면 `errorReponse.getXXX();` 이렇게 명확하게 객체에 있는 값을 가져올 수 있습니다. 그 밖에 특정 Exception에 대해서 ErrorReponse 객체를 어떻게 만들 것인가에 대한 책임을 명확하게 갖는 구조로 설계할 수 있습니다. 세부적인 것은 코드를 확인해주세요
+ErrorResponse 객체 입니다. POJO 객체로 관리하면 `errorReponse.getXXX();` 이렇게 명확하게 객체에 있는 값을 가져올 수 있습니다. 그 밖에 특정 Exception에 대해서 ErrorReponse 객체를 어떻게 만들 것인가에 대한 책임을 명확하게 갖는 구조로 설계할 수 있습니다. 세부적인 것은 코드를 확인해주세요.
 
-# @ControllerAdvice 모든 예외를 헨들링
+# @ControllerAdvice로 모든 예외를 핸들링
 
 `@ControllerAdvice` 어노테이션으로 모든 예외를 한 곳에서 처리할 수 있습니다. 해당 코드의 세부적인 것은 중요하지 않으며 가장 기본적이며 필수적으로 처리하는 코드입니다. 코드에 대한 이해보다 아래의 설명을 참고하는 게 좋습니다.
 
@@ -234,7 +234,7 @@ public class DeviceController {
     ...
     public void sendShutDown() {
         DeviceHandle handle = getHandle(DEV1);
-        // 디바이스 상태를 점검한댜.
+        // 디바이스 상태를 점검한다.
         if (handle != DeviceHandle.INVALID) {
             // 레코드 필드에 디바이스 상태를 저장한다.
             retrieveDeviceRecord(handle);
@@ -306,7 +306,7 @@ protected ResponseEntity<ErrorResponse> handleBusinessException(final BusinessEx
     return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
 }
 ```
-이렇게 발생하는 모든 예외는 `handleBusinessException` 에서 동일하게 핸들링 됩니다. 예외 발생시 알람을 받는 등의 추가적인 행위도 손쉽게 가능합니다. 또 BusinessException 클래스의 하위 클래스 중에서 특정 예외에 대해서 다른 알람을 받는 등의 더 디테일한 헨들링도 가능해집니다.
+이렇게 발생하는 모든 예외는 `handleBusinessException` 에서 동일하게 핸들링 됩니다. 예외 발생시 알람을 받는 등의 추가적인 행위도 손쉽게 가능합니다. 또 BusinessException 클래스의 하위 클래스 중에서 특정 예외에 대해서 다른 알람을 받는 등의 더 디테일한 핸들링도 가능해집니다.
 
 
 ## Coupon Code
@@ -335,7 +335,7 @@ public class Coupon {
 
 # 컨트롤러 예외 처리
 
-컨틀로러에서 모든 요청에 대한 값 검증을 진행하고 이상이 없을 시에 서비스 레이어를 호출해야 합니다. 위에서도 언급했듯이 잘못된 값이 있으면 서비스 레이어에서 정상적인 작업이 진행하기 어렵습니다. **무엇보다 컨틀롤러의 책임을 다하고 있지 않으면 그 책임은 자연스럽게 다른 레이어로 전해지게 되며 이렇게 넘겨받은 책임을 처리하는데 큰 비용과 유지보수 하기 어려워질 수밖에 없습니다.**
+컨틀롤러에서 모든 요청에 대한 값 검증을 진행하고 이상이 없을 시에 서비스 레이어를 호출해야 합니다. 위에서도 언급했듯이 잘못된 값이 있으면 서비스 레이어에서 정상적인 작업을 진행하기 어렵습니다. **무엇보다 컨틀롤러의 책임을 다하고 있지 않으면 그 책임은 자연스럽게 다른 레이어로 전해지게 되며 이렇게 넘겨받은 책임을 처리하는데 큰 비용과 유지보수 하기 어려워질 수밖에 없습니다.**
 
 컨트롤러의 중요한 책임 중의 하나는 요청에 대한 값 검증이 있습니다. 스프링은 JSR 303 기반 어노테이션으로 값 검증을 쉽고 일관성 있게 처리할 수 있도록 도와줍니다. 모든 예외는 `@ControllerAdvice` 선언된 객체에서 핸들링 됩니다. 컨트롤러로 본인이 직접 예외까지 처리하지 않고 예외가 발생하면 그냥 던져버리는 패턴으로 일관성 있게 개발할 수 있습니다.
 
@@ -373,7 +373,7 @@ public class Email {
 }
 ```
 
-회원 가입 Reuqest Body 중에서 유효하지 않은 값이 있을 때 `@Valide` 어노테이션으로 예외를 발생하게 됩니다. 이 발생한 예외는 `@ControllerAdvice`에서 적절하게 핸들링 됩니다. `@NotEmpty`, `@Email` 외에도 다양한 어노테이션들이 제공됩니다.
+회원 가입 Reuqest Body 중에서 유효하지 않은 값이 있을 때 `@Valid` 어노테이션으로 예외를 발생시킬 수 있습니다. 이 예외는 `@ControllerAdvice`에서 적절하게 핸들링 됩니다. `@NotEmpty`, `@Email` 외에도 다양한 어노테이션들이 제공됩니다.
 
 # Tray Catch 전략
 기본적으로 예외가 발생하면 로직의 흐름을 끊고 종료 시켜야 합니다물론 예외도 있지만, 최대한 예외를 발생시켜 종료하는 것을 지향해야 한다고 생각합니다.)
