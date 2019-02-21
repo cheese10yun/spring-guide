@@ -5,10 +5,10 @@ jobs:
       - image: circleci/openjdk:8-jdk
       - image: circleci/mysql:5.7
         environment:
-          - MYSQL_ROOT_HOST=%
-          - MYSQL_DATABASE=guide
-          - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-          - DB_PORT=33060
+          - MYSQL_ROOT_HOST: %
+          - MYSQL_DATABASE: guide
+          - MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          - DB_PORT: 33060
 
 
     working_directory: ~/spring-guide
@@ -29,4 +29,3 @@ jobs:
 
       # run tests!
       - run: mvn clean package
-#          - java -jar -Dspring.profiles.active=local api-service/target/api-service-0.0.1-SNAPSHOT.jar
