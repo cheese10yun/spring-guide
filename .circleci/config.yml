@@ -5,10 +5,12 @@ jobs:
       - image: circleci/openjdk:8-jdk
       - image: circleci/mysql:5.7
         environment:
-          - MYSQL_ROOT_HOST: %
-          - MYSQL_DATABASE: guide
-          - MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          - DB_PORT: 33060
+          MYSQL_ROOT_HOST: '%'
+          MYSQL_DATABASE: "sodatransfer"
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          ports:
+            - "3306:3306"
+
 
 
     working_directory: ~/spring-guide
