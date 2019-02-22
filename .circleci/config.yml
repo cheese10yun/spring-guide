@@ -3,11 +3,11 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
-#      - image: circleci/mysql:5.7
-#        environment:
-#          MYSQL_ROOT_HOST: "%"
-#          MYSQL_DATABASE: "guide"
-#          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_DATABASE: "guide"
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 #        ports:
 #          - "33060:3306"
 
