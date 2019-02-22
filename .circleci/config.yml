@@ -22,7 +22,7 @@ jobs:
       - restore_cache:
           keys:
             - spring-guide-{{ checksum "pom.xml" }}
-      - run: mvn clean package
+      - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
