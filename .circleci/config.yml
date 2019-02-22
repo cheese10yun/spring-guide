@@ -23,11 +23,11 @@ jobs:
       - restore_cache:
           key: spring-guide-{{ checksum "pom.xml" }}
 
-      - run: mvn clean package
+      - run: ./mvnw clean package
 
       - save_cache:
           paths:
             - ~/.m2
           key: spring-guide-{{ checksum "pom.xml" }}
 
-      - run: mvn package
+      - run: ./mvnw package
