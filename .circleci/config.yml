@@ -1,25 +1,36 @@
+# Java Maven CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
 version: 2
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk-browsers
-
+      # specify the version you desire here
+      - image: circleci/openjdk:8-jdk
 
     working_directory: ~/spring-guide
 
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
 
     steps:
-
       - checkout
 
+      # Download and cache dependencies
       - restore_cache:
-          key: spring-guide-{{ checksum "pom.xml" }}
-
-      - run: mvn clean package
+          keys:
+            - spring-guide-{{ checksum "pom.xml" }}
+      - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
           key: spring-guide-{{ checksum "pom.xml" }}
 
-      - run: mvn package
+      # run tests!
+      - run: mvn integration-test
+
+      # coverage report
+      - run: mvn clean cobertura:cobertura coveralls:report
