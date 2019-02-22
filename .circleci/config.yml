@@ -5,11 +5,11 @@ jobs:
       - image: circleci/openjdk:8-jdk-browsers
       - image: circleci/mysql:5.7
         environment:
-          MYSQL_ROOT_HOST: "%"
-          MYSQL_DATABASE: "guide"
-          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-#        ports:
-#          - "33060:3306"
+          MYSQL_ROOT_PASSWORD:
+          MYSQL_DATABASE: guide
+          MYSQL_USER: user
+          MYSQL_PASSWORD:
+
 
 
 
