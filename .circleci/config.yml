@@ -9,7 +9,7 @@ jobs:
           MYSQL_DATABASE: "guide"
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           ports:
-            - "3306:3306"
+            - "33060:3306"
 
 
 
