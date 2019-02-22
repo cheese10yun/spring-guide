@@ -3,13 +3,13 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk
-      - image: circleci/mysql:5.7
-        environment:
-          MYSQL_ROOT_HOST: "%"
-          MYSQL_DATABASE: "guide"
-          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-        ports:
-          - "33060:3306"
+#      - image: circleci/mysql:5.7
+#        environment:
+#          MYSQL_ROOT_HOST: "%"
+#          MYSQL_DATABASE: "guide"
+#          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+#        ports:
+#          - "33060:3306"
 
 
 
@@ -20,7 +20,6 @@ jobs:
       - checkout
       - restore_cache:
           keys: spring-guide-{{ checksum "pom.xml" }}
-            # fallback to using the latest cache if no exact match is found
 
       - run: mvn clean package
 
