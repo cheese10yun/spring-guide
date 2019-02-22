@@ -3,14 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
-      - image: circleci/mysql:5.7
-        environment:
-          MYSQL_ROOT_PASSWORD:
-          MYSQL_DATABASE: guide
-          MYSQL_USER: user
-          MYSQL_PASSWORD:
-
-
 
 
     working_directory: ~/spring-guide
@@ -23,11 +15,11 @@ jobs:
       - restore_cache:
           key: spring-guide-{{ checksum "pom.xml" }}
 
-      - run: ./mvnw clean package
+      - run: mvn clean package
 
       - save_cache:
           paths:
             - ~/.m2
           key: spring-guide-{{ checksum "pom.xml" }}
 
-      - run: ./mvnw package
+      - run: mvn package
