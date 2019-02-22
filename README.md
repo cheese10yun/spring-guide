@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/cheese10yun/spring-guide.svg?style=svg)](https://circleci.com/gh/cheese10yun/spring-guide)
+
 # Spring Guide
 
 # 소개
