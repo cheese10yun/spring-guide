@@ -8,8 +8,8 @@ jobs:
           MYSQL_ROOT_HOST: "%"
           MYSQL_DATABASE: "guide"
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-          ports:
-            - "33060:3306"
+        ports:
+          - "33060:3306"
 
 
 
