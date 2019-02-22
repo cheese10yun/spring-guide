@@ -17,9 +17,11 @@ jobs:
 
 
     steps:
+
       - checkout
+
       - restore_cache:
-          keys: spring-guide-{{ checksum "pom.xml" }}
+          key: spring-guide-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
 
@@ -28,5 +30,4 @@ jobs:
             - ~/.m2
           key: spring-guide-{{ checksum "pom.xml" }}
 
-      # run tests!
       - run: mvn package
