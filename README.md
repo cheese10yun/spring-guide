@@ -18,9 +18,9 @@ $ java -jar -Dspring.profiles.active=local api-service/target/api-service-0.0.1-
 
 # 목차
 1. [Test 전략 가이드](https://github.com/cheese10yun/spring-guide/blob/master/docs/test-guide.md)
-2. [Eception 전략 가이드](https://github.com/cheese10yun/spring-guide/blob/master/docs/exception-guide.md)
-3. [Service 적절한 크기 가이드 작업중...]()
-4. [Domain 객체 가이드 예정....]()
+2. [Exception 전략 가이드](https://github.com/cheese10yun/spring-guide/blob/master/docs/exception-guide.md)
+3. [Domain 객체 가이드](https://github.com/cheese10yun/spring-guide/blob/master/docs/domain-guide.md)
+4. [Service 적절한 크기 가이드 작업중...]()
 5. [외부 API 가이드 예정...]()
 
 
