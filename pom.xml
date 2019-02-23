@@ -86,6 +86,11 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/Q*.class</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
 
         </plugins>
