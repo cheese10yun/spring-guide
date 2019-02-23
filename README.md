@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/cheese10yun/spring-guide.svg?style=svg)](https://circleci.com/gh/cheese10yun/spring-guide)
+[![Coverage Status](https://coveralls.io/repos/github/cheese10yun/spring-guide/badge.svg?branch=master)](https://coveralls.io/github/cheese10yun/spring-guide?branch=master)
 
 # Spring Guide
 
