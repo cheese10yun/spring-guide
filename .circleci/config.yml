@@ -14,6 +14,7 @@ jobs:
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
+      CODECOV_TOKEN: d3979b5f-0f7c-4d6b-9b0f-1715608b6bcc
 
     steps:
       - checkout
@@ -34,3 +35,4 @@ jobs:
 
       # coverage report
       - run: mvn clean test jacoco:report coveralls:report
+      - run: bash <(curl -s https://codecov.io/bash)
