@@ -14,8 +14,8 @@ public class RestTemplateConfig {
   private final RestTemplateBuilder restTemplateBuilder;
 
   @Bean
-  public RestTemplate oauth2RestTemplate() {
-    return restTemplateBuilder.rootUri("http://localhost:8999")
+  public RestTemplate localTestTemplate() {
+    return restTemplateBuilder.rootUri("http://localhost:8080")
         .additionalInterceptors(new RestTemplateClientHttpRequestInterceptor())
         .errorHandler(new RestTemplateErrorHandler())
         .setConnectTimeout(Duration.ofMinutes(3))
