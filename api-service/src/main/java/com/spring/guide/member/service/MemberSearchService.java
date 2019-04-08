@@ -1,4 +1,4 @@
-package com.spring.guide.member;
+package com.spring.guide.member.service;
 
 import com.querydsl.jpa.JPQLQuery;
 import com.spring.guide.domain.member.Member;
