@@ -117,7 +117,7 @@ public class MemberSignUpService { // (1)
         ReferralCode referralCode;
         do {
             referralCode = ReferralCode.generateCode(); //(4)
-        } while (memberRepository.existsByReferralCode(referralCode)); // 5
+        } while (memberRepository.existsByReferralCode(referralCode)); // (5)
 
         return referralCode;
     }
