@@ -62,7 +62,7 @@ findById, findByEmail, changePassword, updateName의 세부 구현이 모두 다
 책임에 대한 자세한 내용은 [Service, ServiceImpl 구조에 대한 고찰](https://github.com/cheese10yun/blog-sample/tree/master/service), [단일 책임의 원칙: Single Responsibility Principle](https://github.com/cheese10yun/spring-SOLID/blob/master/docs/SRP.md)
 를 참조해주세요
 
-물론 1개의 세부 구현체만 갖더라도 인프라스트럭처 영역 같은 경우에는 인터페이스로 바라보는 것이 좋습니다. 그 외에도 다양한 이유로 인터페이스로 바라보게 하는 것이 클래래스 간의 가요 결합을 줄일 수 있는 효과가 있습니다. 제가 말하고 싶은 것은 그렇게 인터페이스로 두더라도 **올바른 책임의 크기에 의해서(대체 가능한 범위) 인터페이스를 나눠야 한다는 것입니다.**
+물론 1개의 세부 구현체만 갖더라도 인프라스트럭처 영역 같은 경우에는 인터페이스로 바라보는 것이 좋습니다. 그 외에도 다양한 이유로 인터페이스로 바라보게 하는 것이 클래래스 간의 강결합을 줄일 수 있는 효과가 있습니다. 제가 말하고 싶은 것은 그렇게 인터페이스로 두더라도 **올바른 책임의 크기에 의해서(대체 가능한 범위) 인터페이스를 나눠야 한다는 것입니다.**
 
 
 ### 서비스의 적절한 크기는 대체 가능성을 염두 하는 것
