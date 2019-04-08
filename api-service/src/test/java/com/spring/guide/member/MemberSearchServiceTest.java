@@ -1,14 +1,15 @@
 package com.spring.guide.member;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import com.spring.guide.domain.member.Member;
 import com.spring.guide.domain.member.ReferralCode;
+import com.spring.guide.member.service.MemberSearchService;
 import com.spring.guide.member.type.MemberExistenceType;
 import com.spring.guide.model.Email;
 import com.spring.guide.test.IntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
 public class MemberSearchServiceTest extends IntegrationTest {

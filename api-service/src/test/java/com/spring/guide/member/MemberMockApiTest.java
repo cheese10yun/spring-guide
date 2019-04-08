@@ -1,10 +1,18 @@
 package com.spring.guide.member;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.spring.guide.domain.member.Member;
 import com.spring.guide.domain.member.MemberHelperService;
 import com.spring.guide.member.dto.SignUpRequest;
 import com.spring.guide.member.dto.SignUpRequestBuilder;
 import com.spring.guide.member.service.MemberProfileService;
+import com.spring.guide.member.service.MemberSearchService;
 import com.spring.guide.member.service.MemberSignUpService;
 import com.spring.guide.model.Email;
 import com.spring.guide.model.Name;
@@ -17,13 +25,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.context.WebApplicationContext;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MemberApi.class)
 public class MemberMockApiTest extends MockApiTest {
