@@ -1,8 +1,8 @@
 package com.spring.guide.member;
 
-import com.spring.guide.common.resonse.Existence;
 import com.spring.guide.domain.member.Member;
 import com.spring.guide.domain.member.MemberHelperService;
+import com.spring.guide.global.common.resonse.Existence;
 import com.spring.guide.member.dto.MemberProfileUpdate;
 import com.spring.guide.member.dto.MemberResponse;
 import com.spring.guide.member.dto.SignUpRequest;

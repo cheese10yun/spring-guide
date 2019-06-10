@@ -1,7 +1,8 @@
-package com.spring.guide.error;
+package com.spring.guide.global.error;
 
 import com.spring.guide.excpetion.BusinessException;
 import com.spring.guide.excpetion.ErrorCode;
+import java.nio.file.AccessDeniedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
-import java.nio.file.AccessDeniedException;
 
 @ControllerAdvice
 @Slf4j

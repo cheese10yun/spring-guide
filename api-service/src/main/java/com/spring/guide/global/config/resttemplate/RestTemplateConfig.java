@@ -1,4 +1,4 @@
-package com.spring.guide.config.resttemplate;
+package com.spring.guide.global.config.resttemplate;
 
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +15,16 @@ public class RestTemplateConfig {
 
   @Bean
   public RestTemplate localTestTemplate() {
+    return restTemplateBuilder.rootUri("http://localhost:8899")
+        .additionalInterceptors(new RestTemplateClientHttpRequestInterceptor())
+        .errorHandler(new RestTemplateErrorHandler())
+        .setConnectTimeout(Duration.ofMinutes(3))
+        .build();
+  }
+
+
+  @Bean
+  public RestTemplate amazonSmsTemplate() {
     return restTemplateBuilder.rootUri("http://localhost:8899")
         .additionalInterceptors(new RestTemplateClientHttpRequestInterceptor())
         .errorHandler(new RestTemplateErrorHandler())

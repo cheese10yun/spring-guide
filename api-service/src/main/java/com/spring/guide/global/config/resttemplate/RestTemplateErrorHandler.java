@@ -1,4 +1,4 @@
-package com.spring.guide.config.resttemplate;
+package com.spring.guide.global.config.resttemplate;
 
 import java.io.BufferedReader;
 import java.io.IOException;

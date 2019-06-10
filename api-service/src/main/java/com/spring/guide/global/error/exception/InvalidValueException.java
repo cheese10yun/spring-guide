@@ -1,4 +1,4 @@
-package com.spring.guide.error.exception;
+package com.spring.guide.global.error.exception;
 
 import com.spring.guide.excpetion.BusinessException;
 import com.spring.guide.excpetion.ErrorCode;
