@@ -85,7 +85,7 @@ Interceptor를 통해서 요청했던 Request 정보와 응답받은 Response �
 
 ## 예외 처리
 
-외부 API는 Vendor마다 각기 다르기 때문에 통일성 있게 예외 처리를 진행하기 어렵습니다. 아래는 터기 하기 애마 한 Rsponse입니다.
+외부 API는 Vendor마다 각기 다르기 때문에 통일성 있게 예외 처리를 진행하기 어렵습니다. 아래는 처리하기 애매한 한 Response입니다.
 
 ```json
 {
