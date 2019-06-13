@@ -10,7 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.spring.guide.domain.member.application.MemberProfileService;
 import com.spring.guide.domain.member.application.MemberSearchService;
 import com.spring.guide.domain.member.application.MemberSignUpService;
-import com.spring.guide.domain.member.dao.MemberHelperService;
+import com.spring.guide.domain.member.dao.MemberFindDao;
 import com.spring.guide.domain.member.domain.Member;
 import com.spring.guide.domain.member.domain.MemberBuilder;
 import com.spring.guide.domain.member.dto.SignUpRequest;
@@ -37,7 +37,7 @@ public class MemberMockApiTest extends MockApiTest {
     private MemberSignUpService memberSignUpService;
 
     @MockBean
-    private MemberHelperService memberHelperService;
+    private MemberFindDao memberFindDao;
 
     @MockBean
     private MemberProfileService memberProfileService;

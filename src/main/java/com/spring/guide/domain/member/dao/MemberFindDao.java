@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemberHelperService {
+public class MemberFindDao {
 
     private final MemberRepository memberRepository;
 

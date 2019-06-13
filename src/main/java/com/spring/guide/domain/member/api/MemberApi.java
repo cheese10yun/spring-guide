@@ -3,7 +3,7 @@ package com.spring.guide.domain.member.api;
 import com.spring.guide.domain.member.application.MemberProfileService;
 import com.spring.guide.domain.member.application.MemberSearchService;
 import com.spring.guide.domain.member.application.MemberSignUpService;
-import com.spring.guide.domain.member.dao.MemberHelperService;
+import com.spring.guide.domain.member.dao.MemberFindDao;
 import com.spring.guide.domain.member.domain.Member;
 import com.spring.guide.domain.member.dto.MemberExistenceType;
 import com.spring.guide.domain.member.dto.MemberProfileUpdate;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberApi {
 
     private final MemberSignUpService memberSignUpService;
-    private final MemberHelperService memberHelperService;
+    private final MemberFindDao memberFindDao;
     private final MemberProfileService memberProfileService;
     private final MemberSearchService memberSearchService;
 
@@ -39,7 +39,7 @@ public class MemberApi {
 
     @GetMapping("/{id}")
     public MemberResponse getMember(@PathVariable long id) {
-        return new MemberResponse(memberHelperService.findById(id));
+        return new MemberResponse(memberFindDao.findById(id));
     }
 
     @PutMapping("/{id}/profile")

@@ -5,7 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 import com.spring.guide.domain.coupon.CouponBuilder;
-import com.spring.guide.domain.coupon.dao.CouponHelperService;
+import com.spring.guide.domain.coupon.dao.CouponFindDao;
 import com.spring.guide.domain.coupon.domain.Coupon;
 import com.spring.guide.domain.coupon.domain.CouponCode;
 import com.spring.guide.domain.coupon.exception.CouponExpireException;
@@ -22,7 +22,7 @@ public class CouponUseServiceTest extends MockTest {
     private CouponUseService couponUseService;
 
     @Mock
-    private CouponHelperService couponHelperService;
+    private CouponFindDao couponFindDao;
 
 
     @Before
@@ -37,7 +37,7 @@ public class CouponUseServiceTest extends MockTest {
         final Coupon coupon = CouponBuilder.build();
         final CouponCode code = CouponCode.generateCode();
 
-        given(couponHelperService.findByCode(any())).willReturn(coupon);
+        given(couponFindDao.findByCode(any())).willReturn(coupon);
 
         //when
         couponUseService.use(code);
@@ -52,7 +52,7 @@ public class CouponUseServiceTest extends MockTest {
         //given
         final Coupon coupon = CouponBuilder.build(LocalDate.now().minusDays(10));
         final CouponCode code = CouponCode.generateCode();
-        given(couponHelperService.findByCode(code)).willReturn(coupon);
+        given(couponFindDao.findByCode(code)).willReturn(coupon);
 
         //when
         couponUseService.use(code);

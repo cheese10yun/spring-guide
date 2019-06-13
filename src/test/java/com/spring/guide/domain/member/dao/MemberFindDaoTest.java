@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-public class MemberHelperServiceTest extends MockTest {
+public class MemberFindDaoTest extends MockTest {
 
     private Member member;
 
@@ -26,7 +26,7 @@ public class MemberHelperServiceTest extends MockTest {
     }
 
     @InjectMocks
-    private MemberHelperService memberHelperService;
+    private MemberFindDao memberFindDao;
 
     @Mock
     private MemberRepository memberRepository;
@@ -37,7 +37,7 @@ public class MemberHelperServiceTest extends MockTest {
         given(memberRepository.findById(anyLong())).willReturn(Optional.of(member));
 
         //when
-        final Member member = memberHelperService.findById(anyLong());
+        final Member member = memberFindDao.findById(anyLong());
 
         //then
         assertThat(member).isNotNull();
@@ -49,7 +49,7 @@ public class MemberHelperServiceTest extends MockTest {
         given(memberRepository.findById(anyLong())).willReturn(Optional.empty());
 
         //when
-        memberHelperService.findById(anyLong());
+        memberFindDao.findById(anyLong());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class MemberHelperServiceTest extends MockTest {
         given(memberRepository.findByEmail(any())).willReturn(Optional.of(member));
 
         //when
-        final Member member = memberHelperService.findByEmail(any());
+        final Member member = memberFindDao.findByEmail(any());
 
         //then
         assertThat(member).isNotNull();
@@ -70,7 +70,7 @@ public class MemberHelperServiceTest extends MockTest {
         given(memberRepository.findByEmail(any())).willReturn(Optional.empty());
 
         //when
-        memberHelperService.findByEmail(member.getEmail());
+        memberFindDao.findByEmail(member.getEmail());
     }
 
     @Test

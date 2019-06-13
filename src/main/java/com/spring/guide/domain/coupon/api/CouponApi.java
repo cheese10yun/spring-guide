@@ -1,7 +1,7 @@
 package com.spring.guide.domain.coupon.api;
 
 import com.spring.guide.domain.coupon.application.CouponUseService;
-import com.spring.guide.domain.coupon.dao.CouponHelperService;
+import com.spring.guide.domain.coupon.dao.CouponFindDao;
 import com.spring.guide.domain.coupon.domain.CouponCode;
 import com.spring.guide.domain.coupon.dto.CouponResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CouponApi {
 
 
-    private final CouponHelperService couponHelperService;
+  private final CouponFindDao couponFindDao;
     private final CouponUseService couponUseService;
 
     @GetMapping("/{code}")
     public CouponResponse getCoupon(@PathVariable final String code) {
-        return new CouponResponse(couponHelperService.findByCode(CouponCode.of(code)));
+      return new CouponResponse(couponFindDao.findByCode(CouponCode.of(code)));
     }
 
     @PutMapping("/{code}")

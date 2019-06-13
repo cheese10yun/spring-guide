@@ -4,7 +4,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
-import com.spring.guide.domain.member.dao.MemberHelperService;
+import com.spring.guide.domain.member.dao.MemberFindDao;
 import com.spring.guide.domain.member.domain.Member;
 import com.spring.guide.domain.member.domain.MemberBuilder;
 import com.spring.guide.domain.member.dto.MemberProfileUpdate;
@@ -20,14 +20,14 @@ public class MemberProfileServiceTest extends MockTest {
     private MemberProfileService memberProfileService;
 
     @Mock
-    private MemberHelperService memberHelperService;
+    private MemberFindDao memberFindDao;
 
     @Test
     public void updateTest() {
         //given
         final Member member = MemberBuilder.build();
         final MemberProfileUpdate dto = MemberProfileUpdateBuilder.build();
-        given(memberHelperService.findById(anyLong())).willReturn(member);
+        given(memberFindDao.findById(anyLong())).willReturn(member);
 
         //when
         final Member updateMember = memberProfileService.update(anyLong(), dto);

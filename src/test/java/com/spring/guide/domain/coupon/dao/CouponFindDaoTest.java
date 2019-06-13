@@ -16,12 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 
-public class CouponHelperServiceTest extends MockTest {
+public class CouponFindDaoTest extends MockTest {
 
     private Coupon coupon;
 
     @InjectMocks
-    private CouponHelperService couponHelperService;
+    private CouponFindDao couponFindDao;
 
     @Mock
     private CouponRepository couponRepository;
@@ -38,7 +38,7 @@ public class CouponHelperServiceTest extends MockTest {
 
         //when
         final CouponCode code = CouponCode.generateCode();
-        final Coupon coupon = couponHelperService.findByCode(code);
+        final Coupon coupon = couponFindDao.findByCode(code);
 
         //then
         assertThat(coupon).isNotNull();
@@ -51,7 +51,7 @@ public class CouponHelperServiceTest extends MockTest {
 
         //when
         final CouponCode code = CouponCode.generateCode();
-        couponHelperService.findByCode(code);
+        couponFindDao.findByCode(code);
 
         //then
     }

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CouponHelperService {
+public class CouponFindDao {
 
     private final CouponRepository couponRepository;
 
