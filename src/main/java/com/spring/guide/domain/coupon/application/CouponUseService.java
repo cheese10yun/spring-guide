@@ -1,8 +1,8 @@
 package com.spring.guide.domain.coupon.application;
 
-import com.spring.guide.domain.coupon.Coupon;
-import com.spring.guide.domain.coupon.CouponCode;
-import com.spring.guide.domain.coupon.CouponHelperService;
+import com.spring.guide.domain.coupon.dao.CouponHelperService;
+import com.spring.guide.domain.coupon.domain.Coupon;
+import com.spring.guide.domain.coupon.domain.CouponCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

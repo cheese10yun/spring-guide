@@ -1,4 +1,4 @@
-package com.spring.guide.domain.member;
+package com.spring.guide.domain.member.api;
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.spring.guide.domain.member.domain.Member;
+import com.spring.guide.domain.member.domain.MemberBuilder;
+import com.spring.guide.domain.member.domain.ReferralCode;
 import com.spring.guide.domain.member.dto.MemberExistenceType;
 import com.spring.guide.domain.member.dto.MemberProfileUpdate;
 import com.spring.guide.domain.member.dto.SignUpRequest;

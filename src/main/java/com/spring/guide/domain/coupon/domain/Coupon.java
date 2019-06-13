@@ -1,6 +1,8 @@
-package com.spring.guide.domain.coupon;
+package com.spring.guide.domain.coupon.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.spring.guide.domain.coupon.exception.CouponAlreadyUseException;
+import com.spring.guide.domain.coupon.exception.CouponExpireException;
 import com.spring.guide.domain.member.domain.Member;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

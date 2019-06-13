@@ -1,6 +1,8 @@
 package com.spring.guide.domain.coupon;
 
 
+import com.spring.guide.domain.coupon.domain.Coupon;
+import com.spring.guide.domain.coupon.domain.CouponCode;
 import java.time.LocalDate;
 
 public class CouponBuilder {

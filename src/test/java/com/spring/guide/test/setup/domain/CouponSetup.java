@@ -1,8 +1,8 @@
 package com.spring.guide.test.setup.domain;
 
-import com.spring.guide.domain.coupon.Coupon;
 import com.spring.guide.domain.coupon.CouponBuilder;
-import com.spring.guide.domain.coupon.CouponRepository;
+import com.spring.guide.domain.coupon.dao.CouponRepository;
+import com.spring.guide.domain.coupon.domain.Coupon;
 import com.spring.guide.test.config.TestProfile;
 import java.util.ArrayList;
 import java.util.List;

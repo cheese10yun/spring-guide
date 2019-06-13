@@ -1,4 +1,4 @@
-package com.spring.guide.domain.coupon;
+package com.spring.guide.domain.coupon.domain;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

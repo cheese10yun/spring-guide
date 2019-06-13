@@ -1,9 +1,13 @@
-package com.spring.guide.domain.coupon;
+package com.spring.guide.domain.coupon.dao;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
+import com.spring.guide.domain.coupon.CouponBuilder;
+import com.spring.guide.domain.coupon.domain.Coupon;
+import com.spring.guide.domain.coupon.domain.CouponCode;
+import com.spring.guide.domain.coupon.exception.CouponNotFoundException;
 import com.spring.guide.test.MockTest;
 import java.util.Optional;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.spring.guide.domain.coupon;
+package com.spring.guide.domain.coupon.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

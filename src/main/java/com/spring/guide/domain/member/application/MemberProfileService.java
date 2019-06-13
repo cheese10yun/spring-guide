@@ -1,6 +1,6 @@
 package com.spring.guide.domain.member.application;
 
-import com.spring.guide.domain.member.MemberHelperService;
+import com.spring.guide.domain.member.dao.MemberHelperService;
 import com.spring.guide.domain.member.domain.Member;
 import com.spring.guide.domain.member.dto.MemberProfileUpdate;
 import lombok.RequiredArgsConstructor;

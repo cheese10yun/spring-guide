@@ -1,8 +1,8 @@
 package com.spring.guide.domain.coupon.api;
 
-import com.spring.guide.domain.coupon.CouponCode;
-import com.spring.guide.domain.coupon.CouponHelperService;
 import com.spring.guide.domain.coupon.application.CouponUseService;
+import com.spring.guide.domain.coupon.dao.CouponHelperService;
+import com.spring.guide.domain.coupon.domain.CouponCode;
 import com.spring.guide.domain.coupon.dto.CouponResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

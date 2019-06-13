@@ -1,6 +1,5 @@
-package com.spring.guide.domain.member;
+package com.spring.guide.domain.member.domain;
 
-import com.spring.guide.domain.member.domain.Member;
 import com.spring.guide.domain.model.Email;
 import com.spring.guide.domain.model.Name;
 

@@ -1,4 +1,4 @@
-package com.spring.guide.domain.coupon;
+package com.spring.guide.domain.coupon.exception;
 
 
 import com.spring.guide.global.error.exception.BusinessException;

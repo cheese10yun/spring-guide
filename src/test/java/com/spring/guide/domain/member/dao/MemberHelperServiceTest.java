@@ -1,4 +1,4 @@
-package com.spring.guide.domain.member;
+package com.spring.guide.domain.member.dao;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
 import com.spring.guide.domain.member.domain.Member;
+import com.spring.guide.domain.member.domain.MemberBuilder;
 import com.spring.guide.domain.member.exception.EmailNotFoundException;
 import com.spring.guide.domain.member.exception.MemberNotFoundException;
 import com.spring.guide.test.MockTest;

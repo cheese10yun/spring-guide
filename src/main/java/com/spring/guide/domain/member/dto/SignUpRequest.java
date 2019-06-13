@@ -1,7 +1,7 @@
 package com.spring.guide.domain.member.dto;
 
-import com.spring.guide.domain.member.ReferralCode;
 import com.spring.guide.domain.member.domain.Member;
+import com.spring.guide.domain.member.domain.ReferralCode;
 import com.spring.guide.domain.model.Email;
 import com.spring.guide.domain.model.Name;
 import javax.validation.Valid;

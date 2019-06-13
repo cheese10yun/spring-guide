@@ -1,9 +1,9 @@
 package com.spring.guide.domain.member.api;
 
-import com.spring.guide.domain.member.MemberHelperService;
 import com.spring.guide.domain.member.application.MemberProfileService;
 import com.spring.guide.domain.member.application.MemberSearchService;
 import com.spring.guide.domain.member.application.MemberSignUpService;
+import com.spring.guide.domain.member.dao.MemberHelperService;
 import com.spring.guide.domain.member.domain.Member;
 import com.spring.guide.domain.member.dto.MemberExistenceType;
 import com.spring.guide.domain.member.dto.MemberProfileUpdate;

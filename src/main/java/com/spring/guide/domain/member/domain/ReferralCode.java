@@ -1,4 +1,4 @@
-package com.spring.guide.domain.member;
+package com.spring.guide.domain.member.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

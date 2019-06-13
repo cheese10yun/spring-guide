@@ -4,9 +4,9 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
-import com.spring.guide.domain.member.MemberBuilder;
-import com.spring.guide.domain.member.MemberHelperService;
+import com.spring.guide.domain.member.dao.MemberHelperService;
 import com.spring.guide.domain.member.domain.Member;
+import com.spring.guide.domain.member.domain.MemberBuilder;
 import com.spring.guide.domain.member.dto.MemberProfileUpdate;
 import com.spring.guide.test.MockTest;
 import com.spring.guide.test.setup.request.MemberProfileUpdateBuilder;

@@ -1,8 +1,9 @@
-package com.spring.guide.domain.member;
+package com.spring.guide.domain.member.dao;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.spring.guide.domain.member.domain.Member;
+import com.spring.guide.domain.member.domain.MemberBuilder;
 import com.spring.guide.domain.model.Email;
 import com.spring.guide.domain.model.Name;
 import com.spring.guide.test.RepositoryTest;

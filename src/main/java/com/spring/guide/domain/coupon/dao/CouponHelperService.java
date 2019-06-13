@@ -1,5 +1,8 @@
-package com.spring.guide.domain.coupon;
+package com.spring.guide.domain.coupon.dao;
 
+import com.spring.guide.domain.coupon.domain.Coupon;
+import com.spring.guide.domain.coupon.domain.CouponCode;
+import com.spring.guide.domain.coupon.exception.CouponNotFoundException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

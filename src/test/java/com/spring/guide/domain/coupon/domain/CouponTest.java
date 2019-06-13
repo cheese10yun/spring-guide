@@ -1,7 +1,9 @@
-package com.spring.guide.domain.coupon;
+package com.spring.guide.domain.coupon.domain;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+import com.spring.guide.domain.coupon.CouponBuilder;
+import com.spring.guide.domain.coupon.exception.CouponExpireException;
 import java.time.LocalDate;
 import org.junit.Test;
 

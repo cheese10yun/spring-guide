@@ -1,9 +1,10 @@
-package com.spring.guide.domain.member;
+package com.spring.guide.domain.member.dao;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import com.spring.guide.domain.member.application.MemberSearchService;
 import com.spring.guide.domain.member.domain.Member;
+import com.spring.guide.domain.member.domain.ReferralCode;
 import com.spring.guide.domain.member.dto.MemberExistenceType;
 import com.spring.guide.domain.model.Email;
 import com.spring.guide.test.IntegrationTest;

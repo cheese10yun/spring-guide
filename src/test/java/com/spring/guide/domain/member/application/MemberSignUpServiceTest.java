@@ -4,9 +4,9 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
-import com.spring.guide.domain.member.MemberBuilder;
-import com.spring.guide.domain.member.MemberRepository;
+import com.spring.guide.domain.member.dao.MemberRepository;
 import com.spring.guide.domain.member.domain.Member;
+import com.spring.guide.domain.member.domain.MemberBuilder;
 import com.spring.guide.domain.member.dto.SignUpRequest;
 import com.spring.guide.domain.member.dto.SignUpRequestBuilder;
 import com.spring.guide.domain.member.exception.EmailDuplicateException;

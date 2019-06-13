@@ -1,6 +1,5 @@
 package com.spring.guide.domain.member.domain;
 
-import com.spring.guide.domain.member.ReferralCode;
 import com.spring.guide.domain.model.Email;
 import com.spring.guide.domain.model.Name;
 import java.time.LocalDateTime;

@@ -1,7 +1,7 @@
 package com.spring.guide.domain.coupon.dto;
 
-import com.spring.guide.domain.coupon.Coupon;
-import com.spring.guide.domain.coupon.CouponCode;
+import com.spring.guide.domain.coupon.domain.Coupon;
+import com.spring.guide.domain.coupon.domain.CouponCode;
 import java.time.LocalDate;
 import lombok.Getter;
 

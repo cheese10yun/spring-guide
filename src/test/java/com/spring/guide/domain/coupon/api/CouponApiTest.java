@@ -1,4 +1,4 @@
-package com.spring.guide.domain.coupon;
+package com.spring.guide.domain.coupon.api;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.spring.guide.domain.coupon.domain.Coupon;
+import com.spring.guide.domain.coupon.domain.CouponCode;
 import com.spring.guide.global.error.exception.ErrorCode;
 import com.spring.guide.test.IntegrationTest;
 import com.spring.guide.test.setup.domain.CouponSetup;

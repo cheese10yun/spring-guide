@@ -1,4 +1,4 @@
-package com.spring.guide.domain.member;
+package com.spring.guide.domain.member.api;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -7,11 +7,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.spring.guide.domain.member.api.MemberApi;
 import com.spring.guide.domain.member.application.MemberProfileService;
 import com.spring.guide.domain.member.application.MemberSearchService;
 import com.spring.guide.domain.member.application.MemberSignUpService;
+import com.spring.guide.domain.member.dao.MemberHelperService;
 import com.spring.guide.domain.member.domain.Member;
+import com.spring.guide.domain.member.domain.MemberBuilder;
 import com.spring.guide.domain.member.dto.SignUpRequest;
 import com.spring.guide.domain.member.dto.SignUpRequestBuilder;
 import com.spring.guide.domain.model.Email;
