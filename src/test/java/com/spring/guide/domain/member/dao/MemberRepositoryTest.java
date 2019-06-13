@@ -1,15 +1,19 @@
 package com.spring.guide.domain.member.dao;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
+import com.querydsl.core.types.Predicate;
 import com.spring.guide.domain.member.domain.Member;
 import com.spring.guide.domain.member.domain.MemberBuilder;
+import com.spring.guide.domain.member.domain.QMember;
 import com.spring.guide.domain.model.Email;
 import com.spring.guide.domain.model.Name;
 import com.spring.guide.test.RepositoryTest;
 import com.spring.guide.test.setup.model.EmailBuilder;
 import com.spring.guide.test.setup.model.NameBuilder;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,8 +42,10 @@ public class MemberRepositoryTest extends RepositoryTest {
         assertThat(saveMember.getName().getFirst()).isEqualTo("first");
         assertThat(saveMember.getName().getMiddle()).isEqualTo("middle");
         assertThat(saveMember.getName().getLast()).isEqualTo("last");
-        assertThat(saveMember.getCreateAt()).isAfter(LocalDateTime.now().minusMinutes(1));
-        assertThat(saveMember.getUpdateAt()).isAfter(LocalDateTime.now().minusMinutes(1));
+        assertThat(saveMember.getCreateAt())
+            .isGreaterThanOrEqualTo(LocalDateTime.now().minusMinutes(1));
+        assertThat(saveMember.getUpdateAt())
+            .isGreaterThanOrEqualTo(LocalDateTime.now().minusMinutes(1));
     }
 
     @Test
@@ -59,5 +65,25 @@ public class MemberRepositoryTest extends RepositoryTest {
     public void existsByEmail_존재하지않은_경우_false() {
         final boolean existsByEmail = memberRepository.existsByEmail(Email.of("ehdgoanfrhkqortntksdls@asd.com"));
         assertThat(existsByEmail).isFalse();
+    }
+
+    @Test
+    public void predicate_test() {
+        //given
+        final QMember qMember = QMember.member;
+        final Predicate predicate = qMember.email.eq(Email.of("cheese10yun@gmail.com"));
+
+        //when
+        final boolean exists = memberRepository.exists(predicate);
+
+        //then
+        assertThat(exists).isTrue();
+    }
+
+    @Test
+    public void searchByEmail_test() {
+        final List<Member> members = memberRepository.searchByEmail(email);
+        assertThat(members).contains(saveMember);
+        assertThat(members.size()).isGreaterThanOrEqualTo(1);
     }
 }
