@@ -7,11 +7,10 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
-public class AmazonSmsClient implements SmsClient {
+public class KtSmsClient implements SmsClient {
 
   @Override
   public void send(SmsRequest dto) {
-
-    // amazon sms 호출...
+    // Kt sms 호출...
   }
 }
