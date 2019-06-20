@@ -1,4 +1,4 @@
-package com.spring.guide.global.common.resonse;
+package com.spring.guide.global.common.response;
 
 
 import lombok.Getter;

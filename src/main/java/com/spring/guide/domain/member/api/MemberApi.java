@@ -9,7 +9,7 @@ import com.spring.guide.domain.member.dto.MemberExistenceType;
 import com.spring.guide.domain.member.dto.MemberProfileUpdate;
 import com.spring.guide.domain.member.dto.MemberResponse;
 import com.spring.guide.domain.member.dto.SignUpRequest;
-import com.spring.guide.global.common.resonse.Existence;
+import com.spring.guide.global.common.response.Existence;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
