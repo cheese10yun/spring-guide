@@ -8,6 +8,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,8 +35,8 @@ public class Order {
     @Embedded
     private Orderder orderder;
 
-    @ElementCollection
-    @CollectionTable(name = "orders_item", joinColumns = @JoinColumn(name = "id"))
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "orders_item", joinColumns = @JoinColumn(name = "id", nullable = false))
     private List<OrderItem> orderItems = new ArrayList<>();
 
     public Order(Address address, Orderder orderder, List<ProductItem> productItems) {
