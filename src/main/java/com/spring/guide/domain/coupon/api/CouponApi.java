@@ -29,5 +29,4 @@ public class CouponApi {
     public void useCoupon(@PathVariable final String code) {
         couponUseService.use(CouponCode.of(code));
     }
-
 }
