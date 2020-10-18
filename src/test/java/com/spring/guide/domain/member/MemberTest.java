@@ -6,6 +6,10 @@ import com.spring.guide.domain.member.domain.Member;
 import com.spring.guide.domain.member.domain.MemberBuilder;
 import com.spring.guide.domain.model.Email;
 import com.spring.guide.domain.model.Name;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 
@@ -60,5 +64,57 @@ public class MemberTest {
                 member.getName().getLast(),
                 member.getName().getMiddle()
         );
+    }
+
+    @Test
+    public void asdasd() {
+
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        final String text = "2016-03-04 11:30:40";
+
+        final LocalDateTime now = LocalDateTime.parse(text, formatter);
+        final LocalDate localDate = LocalDate.of(now.getYear(), now.getMonth(), now.getDayOfMonth());
+
+        final Date date = Date.valueOf(localDate);
+
+        System.out.println(date);
+
+
+
+    }
+
+    @Test
+    public void name() {
+        final String text = "2016-03-04 11:30:40";
+        final String substring = text.substring(0, 10);
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        final LocalDate now = LocalDate.parse(substring, formatter);
+        System.out.println(now);
+
+
+
+        System.out.println(substring);
+    }
+
+    @Test
+    public void asdasds() {
+        final LocalDate date = LocalDate.of(2020, 12, 12);
+        date.plusDays(1);
+
+
+
+
+        final Date date1 = Date.valueOf("2019-12-12");
+        System.out.printf(date1.toString());
+    }
+
+    @Test
+    public void adasdasdasd() {
+
+        Date date =  Date.valueOf("2019-12-12");
+
+
+
     }
 }
