@@ -73,7 +73,7 @@ public class Member {
 * `@NoArgsConstructor(access = AccessLevel.PROTECTED)` JPA에서는 프록시 객체가 필요하므로 기본 생성자 하나가 반드시 있어야 합니다. 이때 접근지시자는 `protected`면 됩니다. (낮은 접근지시자를 사용)
 * `@Data`는 사용하지 말자, 너무 많은 것들을 해준다.
 * `@Setter`는 사용하지 말자, 객체는 변경 포인트를 남발하지 말자.
-* `@ToString` 무한 참조가 생길 수 있다. 조심하자. (개인적으로 `@ToString(of = {"")` 권장)
+* `@ToString` 무한 참조가 생길 수 있다. 조심하자. (개인적으로 `@ToString(of = {""})` 권장)
 * 클래스 상단의 `@Builder` X, 생성자 위에 `@Builder` OK
 
 
