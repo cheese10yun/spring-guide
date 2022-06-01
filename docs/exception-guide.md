@@ -10,7 +10,7 @@
 - [@ControllerAdvice로 모든 예외를 핸들링](#controlleradvice-%EB%AA%A8%EB%93%A0-%EC%98%88%EC%99%B8%EB%A5%BC-%ED%97%A8%EB%93%A4%EB%A7%81)
 - [Error Code 정의](#error-code-%EC%A0%95%EC%9D%98)
 - [Business Exception 처리](#business-exception-%EC%B2%98%EB%A6%AC)
-  - [비지니스 예외를 위한 최상위 BusinessException 클래스](#%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4-%EC%98%88%EC%99%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%B5%9C%EC%83%81%EC%9C%84-businessexception-%ED%81%B4%EB%9E%98%EC%8A%A4)
+  - [비즈니스 예외를 위한 최상위 BusinessException 클래스](#%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4-%EC%98%88%EC%99%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%B5%9C%EC%83%81%EC%9C%84-businessexception-%ED%81%B4%EB%9E%98%EC%8A%A4)
   - [Coupon Code](#coupon-code)
 - [컨트롤러 예외 처리](#%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC-%EC%98%88%EC%99%B8-%EC%B2%98%EB%A6%AC)
   - [Controller](#controller)
@@ -138,7 +138,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Authentication 객체가 필요한 권한을 보유하지 않은 경우 발생합
+     * Authentication 객체가 필요한 권한을 보유하지 않은 경우 발생합니다.
      */
     @ExceptionHandler(AccessDeniedException.class)
     protected ResponseEntity<ErrorResponse> handleAccessDeniedException(AccessDeniedException e) {
@@ -166,8 +166,8 @@ public class GlobalExceptionHandler {
 ```
 
 * handleMethodArgumentNotValidException
-  * avax.validation.Valid or @Validated 으로 binding error 발생시 발생한다. )
-  * HttpMessageConverter 에서 등록한 HttpMessageConverter binding 못할경우 발생 주로 @RequestBody, @RequestPart 어노테이션에서 발생
+  * avax.validation.Valid or @Validated 으로 binding error 발생 시 발생한다. )
+  * HttpMessageConverter 에서 등록한 HttpMessageConverter binding 못할 경우 발생. 주로 @RequestBody, @RequestPart 어노테이션에서 발생함.
 * handleBindException
   * @ModelAttribut 으로 binding error 발생시 BindException 발생한다.
 * MethodArgumentTypeMismatchException
@@ -176,13 +176,13 @@ public class GlobalExceptionHandler {
 * handleHttpRequestMethodNotSupportedException :
   * 지원하지 않은 HTTP method 호출 할 경우 발생
 * handleAccessDeniedException
-  * Authentication 객체가 필요한 권한을 보유하지 않은 경우 발생합
+  * Authentication 객체가 필요한 권한을 보유하지 않은 경우 발생합니다.
   * Security에서 던지는 예외
 * handleException
   * 그 밖에 발생하는 모든 예외 처리, Null Point Exception, 등등
   * 개발자가 직접 핸들링해서 다른 예외로 던지지 않으면 모두 이곳으로 모인다.
 * handleBusinessException
-  * 비지니스 요규사항에 따른 Exception
+  * 비즈니스 요규사항에 따른 Exception
   * 아래에서 자세한 설명 진행
 
 추가로 스프링 및 라이브러리 등 자체적으로 발생하는 예외는 `@ExceptionHandler` 으로 추가해서 적절한 Error Response를 만들고 **비지니스 요구사항에 예외일 경우 `BusinessException` 으로 통일성 있게 처리하는 것을 목표로 한다. 추가로 늘어날 수는 있겠지만 그 개수를 최소한으로 하는 노력이 필요합니다.**
@@ -373,28 +373,28 @@ public class Email {
 }
 ```
 
-회원 가입 Reuqest Body 중에서 유효하지 않은 값이 있을 때 `@Valid` 어노테이션으로 예외를 발생시킬 수 있습니다. 이 예외는 `@ControllerAdvice`에서 적절하게 핸들링 됩니다. `@NotEmpty`, `@Email` 외에도 다양한 어노테이션들이 제공됩니다.
+회원 가입 Reuqest Body 중에서 유효하지 않은 값이 있을 때 `@Valid` 어노테이션으로 예외를 발생시킬 수 있습니다. 이 예외는 `@ControllerAdvice`에서 적절하게 처리됩니다. `@NotEmpty`, `@Email` 외에도 다양한 어노테이션들이 제공됩니다.
 
 # Try Catch 전략
-기본적으로 예외가 발생하면 로직의 흐름을 끊고 종료 시켜야 합니다물론 예외도 있지만, 최대한 예외를 발생시켜 종료하는 것을 지향해야 한다고 생각합니다.)
+기본적으로 예외가 발생하면 로직의 흐름을 끊고 종료 시켜야 합니다. 물론 예외도 있지만, 최대한 예외를 발생시켜 종료하는 것을 지향해야 한다고 생각합니다.
 
 ```java
 try {
-    // 비지니스 로직 수행...
+    // 비즈니스 로직 수행...
 }catch (Exception e){
     e.printStackTrace();
 }
 ```
-위 같은 코드는 지양하야 하는 패턴입니다. 최소한의 양심으로 `e.printStackTrace();` 로그라도 출력했지만 이미 예외가 발생했음에도 불가하고 다음 로직을 실행하게 됩니다. 이런 식의 `try catch`를 최대한 지양해야 합니다.
+위 같은 코드는 지양해야 하는 패턴입니다. 최소한의 양심으로 `e.printStackTrace();` 로그라도 출력했지만 이미 예외가 발생했음에도 불구하고 다음 로직을 실행합니다. 이런 식의 `try catch`를 최대한 지양해야 합니다.
 
 하지만 Checked Exception 같은 경우에는 예외를 반드시 감싸야 하므로 이러한 경우에는 `try catch`를 사용해야 합니다.
 
 ```java
 try {
-    // 비지니스 로직 수행...
+    // 비즈니스 로직 수행...
 }catch (Exception e){
     e.printStackTrace();
-    throw new XXX비지니스로직예외(e);
+    throw new XXX비즈니스로직예외(e);
 }
 ```
 `try catch`를 사용해야 하는 경우라면 더 구체적인 예외로 Exception을 발생시키는 것이 좋습니다. 간단하게 정리하면
