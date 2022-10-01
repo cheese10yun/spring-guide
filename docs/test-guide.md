@@ -130,8 +130,7 @@ public class MemberApiTest extends IntegrationTest {
         resultActions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("email.value").value(member.getEmail().getValue()))
-                .andExpect(jsonPath("email.host").value(member.getEmail().getHost()))
-                .andExpect(jsonPath("email.id").value(member.getEmail().getId()))
+                .andExpect(jsonPath("email.host").value(member.getEmail().getHost())                .andExpect(jsonPath("email.id").value(member.getEmail().getId()))
                 .andExpect(jsonPath("name.first").value(member.getName().getFirst()))
                 .andExpect(jsonPath("name.middle").value(member.getName().getMiddle()))
                 .andExpect(jsonPath("name.last").value(member.getName().getLast()))
@@ -153,7 +152,7 @@ public class MemberApiTest extends IntegrationTest {
 * 요청에 대한 메서드를 `requestSignUp(...)`으로 분리해서 재사용성을 높입니다. 해당 메서드로 valdate 실패하는 케이스도 작성합니다 `andDo(print())` 메서드를 추가해서 해당 요청에 대한 출력을 확인합니다. 디버깅에 매우 유용합니다.
 * 모든 response에 대한 `andExpect`를 작성합니다. 간혹 `.andExpect(content().string(containsString("")))` 이런 테스트를 진행하는데 특정 문자열이 들어 있는지 없는지 확인하는 것보다 모
   * **response에 하나라도 빠지거나 변경되면 API 변경이 이루어진 것이고 그 변경에 맞게 테스트 코드도 변경되어야 합니다.**
-* `회원 조회` 테스트 강은 경우 `memberSetup.save();` 메서드로 테스트전에 데이터베이스에 insert 합니다. 
+* `회원 조회` 테스트 같은 경우 `memberSetup.save();` 메서드로 테스트전에 데이터베이스에 insert 합니다. 
   * 데이터베이스에 미리 있는 값을 검증하는 것은 데이터베이스 상태에 의존한 코드가 되며 누군가가 회원 정보를 변경하게 되면 테스트 코드가 실패하게 됩니다.
   * 테스트 전에 데이터를 insert하지 않는다면 테스트 코드 구동 전에 `.sql` 으로 미리 데이터베이스를 준비시킵니다 ApplicationRunner를 이용해서 데이터베이스를 준비시키 방법도 있습니다.
   * **중요한 것은 데이터베이스 상태에 너무 의존적인 테스트는 향후 로직의 문제가 없더라도 테스트가 실패하는 상황이 자주 만나게 됩니다.**
