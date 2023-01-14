@@ -259,7 +259,7 @@ public class MemberSignUpServiceTest extends MockTest {
   * 이런 문제는 통합 테스트에서 해당 객체를 Mock 객체로 변경해서 테스트를 변경해서 테스트할 수도 있습니다.
 
 ## 단점
-* Mcok 테스트와 단점은 거의 같습니다.
+* Mock 테스트와 단점은 거의 같습니다.
 * 요청부터 응답까지 모든 테스트를 Mock기반으로 테스트하기 때문에 실제 환경에서는 제대로 동작하지 않을 가능성이 매우 큽니다.
 
 ## Code
