@@ -130,7 +130,8 @@ public class MemberApiTest extends IntegrationTest {
         resultActions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("email.value").value(member.getEmail().getValue()))
-                .andExpect(jsonPath("email.host").value(member.getEmail().getHost())                .andExpect(jsonPath("email.id").value(member.getEmail().getId()))
+                .andExpect(jsonPath("email.host").value(member.getEmail().getHost())
+                .andExpect(jsonPath("email.id").value(member.getEmail().getId()))
                 .andExpect(jsonPath("name.first").value(member.getName().getFirst()))
                 .andExpect(jsonPath("name.middle").value(member.getName().getMiddle()))
                 .andExpect(jsonPath("name.last").value(member.getName().getLast()))
